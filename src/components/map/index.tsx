@@ -1,15 +1,15 @@
 import {FC, memo, useEffect, useMemo} from 'react';
-import {useGetCurrentLocation} from '../../services';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {LocationOn, PersonPinCircle} from '@material-ui/icons'
+import {useTheme} from '@material-ui/core';
 import {MapContainer, Polyline, TileLayer, useMap} from 'react-leaflet';
 import L from 'leaflet';
-import {renderToStaticMarkup} from 'react-dom/server';
-import {FlagTwoTone, LocationOn, PersonPinCircle} from '@material-ui/icons'
-import {MapProps} from './interfaces';
+
 import MarkerComponent from './marker';
+import {MapProps} from './interfaces';
 import {MAPBOX_TOKEN} from '../../credentials';
 import {customStyles} from "../../Theme";
-import {useTheme} from '@material-ui/core';
-import useDirection from '../../services/mapbox/Directions';
+import {useDirection, useGetCurrentLocation} from '../../services';
 import {Profile} from "../../services/mapbox/interfaces";
 
 const MapComponent: FC<MapProps> = ({places, zoom, ...props}) => {
@@ -32,11 +32,6 @@ const MapComponent: FC<MapProps> = ({places, zoom, ...props}) => {
         html: renderToStaticMarkup(<LocationOn className={customStyle.customMarker}/>),
         popupAnchor: [2, -28]
     }), [customStyle.customMarker])
-    const goalIcon = useMemo(() => L.divIcon({
-        html: renderToStaticMarkup(<FlagTwoTone className={customStyle.customMarker} 
-                                                style={{color: palette.primary.main, zIndex:1000}}/>),
-        popupAnchor: [2, -28]
-    }), [customStyle.customMarker, palette.primary.main])
 
 
     const direction = useDirection({
@@ -64,37 +59,33 @@ const MapComponent: FC<MapProps> = ({places, zoom, ...props}) => {
         return null
     }
 
-    const Map = () => {
-        return useMemo(() => <MapContainer zoom={zoom} className={customStyle.mapStyle} scrollWheelZoom={true}>
-            <TileLayer
-                attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-                url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
-                id={'mapbox/streets-v11'}
-                accessToken={MAPBOX_TOKEN}
-                tileSize={512}
-                zoomOffset={-1}
-            />
-            <CenterMap/>
-
-            <MarkerComponent position={center} icon={centerIcon}/>
-            {
-                places && places.map((item: any, index: number) => {
-                    return <MarkerComponent position={item.coordinate} key={index} icon={optionIcon}/>
-                })
-            }
-            {                
-                direction && <Polyline pathOptions={{color: palette.error.main}}
-                                       positions={direction.routes[0].geometry.coordinates!}/>
-            }
-        </MapContainer>, [CenterMap, center, centerIcon, customStyle.mapStyle, goalIcon, palette.primary.main, places, zoom])
-    }
-
     return <div className={customStyle.mapStyle} style={{margin: '-8px'}}>
         {
             error ? <p>location error: {error}</p>
                 : <>
                     <p className={customStyle.customLayout}> Lat: {center.lat} | Lng: {center.lng}</p>
-                    <Map/>
+                    <MapContainer zoom={zoom} className={customStyle.mapStyle} scrollWheelZoom={true}>
+                        <TileLayer
+                            attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+                            url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
+                            id={'mapbox/streets-v11'}
+                            accessToken={MAPBOX_TOKEN}
+                            tileSize={512}
+                            zoomOffset={-1}
+                        />
+                        <CenterMap/>
+
+                        <MarkerComponent position={center} icon={centerIcon}/>
+                        {
+                            places && places.map((item: any, index: number) => {
+                                return <MarkerComponent position={item.coordinate} key={index} icon={optionIcon}/>
+                            })
+                        }
+                        {
+                            direction && <Polyline pathOptions={{color: palette.error.main}}
+                                                   positions={direction.routes[0].geometry.coordinates!}/>
+                        }
+                    </MapContainer>
                 </>
         }
     </div>

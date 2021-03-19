@@ -1,4 +1,4 @@
-import {Geometry, Legs, Maneuver, Route, Step, Waypoints} from './interfaces';
+import {Geometry, Legs, Maneuver, Route, Step, Waypoints} from '../interfaces';
 import {LatLngTuple} from 'leaflet';
 
 const manageGeometry = (data: Geometry): Geometry => {

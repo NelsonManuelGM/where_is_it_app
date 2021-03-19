@@ -1,9 +1,10 @@
+import {useEffect, useState} from 'react';
+import {LatLngLiteral} from 'leaflet';
+
 import axios from './../axios'
-import {LatLngLiteral} from "leaflet";
-import {useEffect, useState} from "react";
-import {MAPBOX_TOKEN} from "../../credentials";
-import {Direction, DirectionsParams} from "./interfaces";
-import {manageRoutes, manageWaypoints} from './dataCleaner'
+import {manageRoutes, manageWaypoints} from './auxiliary/dataCleaner'
+import {Direction, DirectionsParams} from './interfaces';
+import {MAPBOX_TOKEN} from '../../credentials';
 
 const alignCoordinates = (props: Array<LatLngLiteral>): string => {
     let coordinates: Array<string> = []
@@ -29,7 +30,6 @@ const useDirection = (options: DirectionsParams) => {
             try {
                 const {data, status} = await axios.get<Direction>(url!)
                 if (status && status === 200) {
-                    // setDirection(data)
                     setDirection({
                         routes: manageRoutes(data.routes),
                         waypoints: manageWaypoints(data.waypoints)
