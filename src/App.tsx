@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import {useGetToken} from './services';
-import MapComponent from './components/map';
-import {places as listPlaces} from './places';
-import {Place} from "./components/map/interfaces";
+import MapComponent from './components/Map';
+import {places as listPlaces} from './services/places';
+import {Place} from "./components/Map/interfaces";
 let date = new Date()
 
 

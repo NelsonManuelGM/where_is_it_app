@@ -4,8 +4,8 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {ThemeProvider} from '@material-ui/core/styles';
-import {theme} from './Theme';
-import AppStyle from './AppStyle';
+import {theme} from './context/theme';
+import AppStyle from './context/appStyle';
 
 ReactDOM.render(
     <React.StrictMode>

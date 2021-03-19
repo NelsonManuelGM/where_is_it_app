@@ -7,8 +7,8 @@ import L from 'leaflet';
 
 import MarkerComponent from './marker';
 import {MapProps} from './interfaces';
-import {MAPBOX_TOKEN} from '../../credentials';
-import {customStyles} from "../../Theme";
+import {MAPBOX_TOKEN} from '../../services/credentials';
+import {customStyles} from "../../context/theme";
 import {useDirection, useGetCurrentLocation} from '../../services';
 import {Profile} from "../../services/mapbox/interfaces";
 

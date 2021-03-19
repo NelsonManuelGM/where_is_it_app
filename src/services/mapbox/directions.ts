@@ -4,7 +4,7 @@ import {LatLngLiteral} from 'leaflet';
 import axios from './../axios'
 import {manageRoutes, manageWaypoints} from './auxiliary/dataCleaner'
 import {Direction, DirectionsParams} from './interfaces';
-import {MAPBOX_TOKEN} from '../../credentials';
+import {MAPBOX_TOKEN} from '../credentials';
 
 const alignCoordinates = (props: Array<LatLngLiteral>): string => {
     let coordinates: Array<string> = []
