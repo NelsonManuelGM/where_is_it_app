@@ -1,23 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState} from 'react';
+import {useGetToken} from './services';
+import MapComponent from './components/map';
+import {places as listPlaces} from './places';
+import {Place} from "./components/map/interfaces";
+let date = new Date()
+
 
 function App() {
+    const [token, setToken] = useState<string>('')
+
+    const [places,setPlaces] = useState<Array<Place>>(listPlaces)
+
+    const [zoom, setZoom] = useState(14);
+
+    useEffect(()=>{
+        setToken(useGetToken)
+    },[])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+         {/*<button onClick={()=>alert(token)}>Click</button>*/}
+
+         <MapComponent places={places}  zoom={zoom}/>
       </header>
     </div>
   );
