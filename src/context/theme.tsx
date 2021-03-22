@@ -12,11 +12,10 @@ const customStyles = makeStyles({
     customMarker: {
         position: 'absolute',
         color: theme.palette.warning.main,
-        top: '-190%',
-        left: '-90%',
+        top: '-200%',
+        left: '-100%',
         width: '2.3rem',
         height: '2.3rem',
-        zIndex: 500,
     },
     customLayout:{
         position: 'absolute',
