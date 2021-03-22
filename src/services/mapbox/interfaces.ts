@@ -7,7 +7,7 @@ export enum Profile {
     drivingTraffic = 'driving-traffic'
 }
 
-export interface DirectionsParams {
+export interface DirectionsProps {
     profile: string,
     departure: LatLngLiteral,
     target: Array<LatLngLiteral>,
