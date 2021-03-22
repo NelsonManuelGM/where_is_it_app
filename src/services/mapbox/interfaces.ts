@@ -9,7 +9,8 @@ export enum Profile {
 
 export interface DirectionsParams {
     profile: string,
-    coordinates: Array<LatLngLiteral>,
+    departure: LatLngLiteral,
+    target: Array<LatLngLiteral>,
     steps: boolean,
     alternatives: boolean,
 }
@@ -19,6 +20,7 @@ export interface Waypoints {
     name?: string,
     location: LatLngTuple
 }
+
 export interface Maneuver {
     bearing_after: number,
     bearing_before: number,
@@ -28,33 +30,36 @@ export interface Maneuver {
 }
 
 export interface Geometry {
-    coordinates:Array<LatLngTuple>,
-    type:string
+    coordinates: Array<LatLngTuple>,
+    type: string
 }
 
 export interface Step {
     driving_side?: string,
-    mode:string,
-    duration:number,
-    name?:string,
-    distance:number,
+    mode: string,
+    duration: number,
+    name?: string,
+    distance: number,
     maneuver: Maneuver
     geometry: Geometry
 }
+
 export interface Legs {
     summary?: string,
     distance: number,
     duration: number,
     steps: Array<Step>,
 }
+
 export interface Route {
     duration: number,
     distance: number,
     legs: Array<Legs>
     geometry: Geometry,
 }
+
 export interface Direction {
     routes: Array<Route>
-    waypoints : Array<Waypoints>,
+    waypoints: Array<Waypoints>,
 }
 

@@ -10,6 +10,7 @@ export interface MapSize {
 export interface MapProps {
     places: Array<Place> | [],
     zoom: number,
+    target: Array<LatLngLiteral>,
     children?: ReactNode,
 }
 

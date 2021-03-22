@@ -12,7 +12,7 @@ import {customStyles} from "../../context/theme";
 import {useDirection, useGetCurrentLocation} from '../../services';
 import {Profile} from "../../services/mapbox/interfaces";
 
-const MapComponent: FC<MapProps> = ({places, zoom, ...props}) => {
+const MapComponent: FC<MapProps> = ({places, zoom, target, ...props}) => {
     const customStyle = customStyles();
     const {palette} = useTheme()
 
@@ -36,10 +36,8 @@ const MapComponent: FC<MapProps> = ({places, zoom, ...props}) => {
 
     const direction = useDirection({
         profile: Profile.driving,
-        coordinates: [
-            center,
-            {lat: 25.684209407950874, lng: -80.41917278495983}
-        ],
+        departure:center,
+        target: target,
         steps: true,
         alternatives: false
     })
@@ -82,7 +80,7 @@ const MapComponent: FC<MapProps> = ({places, zoom, ...props}) => {
                             })
                         }
                         {
-                            direction && <Polyline pathOptions={{color: palette.error.main}}
+                            direction && <Polyline pathOptions={{color: palette.error.main,weight:5}}
                                                    positions={direction.routes[0].geometry.coordinates!}/>
                         }
                     </MapContainer>
