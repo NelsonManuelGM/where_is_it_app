@@ -1,10 +1,41 @@
-import {createMuiTheme, makeStyles} from "@material-ui/core";
+import {createMuiTheme, makeStyles, ThemeOptions} from "@material-ui/core";
+import {CSSProperties} from "react";
 
-const theme = createMuiTheme({
-});
+declare module "@material-ui/core/styles/createPalette" {
+    interface Palette {
+        grayscale: {
+            light: CSSProperties['color'];
+            main: CSSProperties['color'];
+            dark: CSSProperties['color'];
+        }
+    }
+
+    interface PaletteOptions {
+        grayscale: {
+            light: CSSProperties['color'];
+            main: CSSProperties['color'];
+            dark: CSSProperties['color'];
+        }
+    }
+}
+
+function createMyTheme(options: ThemeOptions) {
+    return createMuiTheme({
+        palette: {
+            grayscale: {
+                dark: '#000000',
+                main: '#1f1f1f',
+                light: '#4c4c4c',
+            }
+        },
+        ...options
+    })
+}
+
+const theme = createMyTheme({})
 
 const customStyles = makeStyles({
-    mapStyle:{
+    mapStyle: {
         width: '100%',
         height: '100vh',
         position: 'relative',
@@ -16,19 +47,26 @@ const customStyles = makeStyles({
         left: '-100%',
         width: '2.3rem',
         height: '2.3rem',
-    },
-    customLayout:{
+    }
+});
+
+const uiStyles = makeStyles({
+    customColor: {
         position: 'absolute',
         right: '25px',
         zIndex: 500,
-        background: theme.palette.warning.light,
+        background: theme.palette.grayscale.dark,
         padding: '0.5rem',
         borderRadius: '5px',
-        opacity: '70%'
-    }
+        opacity: '70%',
+        margin: '1rem 1rem',
+        color: 'white',
+    },
+
 });
 
 export {
     theme,
-    customStyles
+    customStyles,
+    uiStyles
 }
