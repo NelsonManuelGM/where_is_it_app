@@ -35,7 +35,7 @@ const MapComponent: FC<MapProps> = ({places, zoom, center, direction}) => {
     }, [center, zoom])
 
     return <div className={customStyle.mapStyle} style={{margin: '-8px'}}>
-        <MapContainer zoom={zoom} className={customStyle.mapStyle} scrollWheelZoom={true} zoomControl={false}
+        <MapContainer zoom={zoom} className={customStyle.mapStyle} zoomAnimation={true} scrollWheelZoom={true} zoomControl={false}
                       whenCreated={whenCreatedHandler}>
             <TileLayer
                 attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
