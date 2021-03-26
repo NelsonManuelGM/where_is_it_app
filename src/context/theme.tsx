@@ -1,4 +1,4 @@
-import {createMuiTheme, makeStyles, ThemeOptions} from "@material-ui/core";
+import {createMuiTheme, makeStyles, responsiveFontSizes, ThemeOptions} from "@material-ui/core";
 import {CSSProperties} from "react";
 
 declare module "@material-ui/core/styles/createPalette" {
@@ -24,15 +24,17 @@ function createMyTheme(options: ThemeOptions) {
         palette: {
             grayscale: {
                 dark: '#000000',
-                main: '#1f1f1f',
-                light: '#4c4c4c',
+                main: '#4c4c4c',
+                light: '#ffffff',
             }
         },
         ...options
     })
 }
 
-const theme = createMyTheme({})
+let theme = createMyTheme({})
+
+theme = responsiveFontSizes(theme);
 
 const customStyles = makeStyles({
     mapStyle: {
@@ -47,26 +49,24 @@ const customStyles = makeStyles({
         left: '-100%',
         width: '2.3rem',
         height: '2.3rem',
-    }
-});
-
-const uiStyles = makeStyles({
-    customColor: {
-        position: 'absolute',
-        right: '25px',
-        zIndex: 500,
-        background: theme.palette.grayscale.dark,
-        padding: '0.5rem',
-        borderRadius: '5px',
-        opacity: '70%',
-        margin: '1rem 1rem',
-        color: 'white',
     },
-
+    navigationIcon: {
+        margin:'0 0.5rem'
+    },
+    dashboardStyle: {
+        boxShadow: `0 1px 3px 2px ${theme.palette.grayscale.main}`,
+        color: theme.palette.grayscale.light,
+        background: theme.palette.grayscale.dark,
+        opacity: '85%',
+        borderRadius: '6px',
+        padding: '0.5rem',
+        zIndex: 500,
+        position: 'absolute'
+    },
 });
+
 
 export {
     theme,
-    customStyles,
-    uiStyles
+    customStyles
 }
