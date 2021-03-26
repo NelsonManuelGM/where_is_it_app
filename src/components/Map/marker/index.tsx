@@ -1,31 +1,25 @@
 import {Marker, Popup} from "react-leaflet";
 import {DivIcon, LatLngLiteral} from "leaflet";
-import {FC, ReactNode, useMemo} from "react";
+import {FC, memo, ReactNode, useMemo} from "react";
 
 interface MarkerProps {
     position: LatLngLiteral,
     icon?: DivIcon,
-    children?: ReactNode
+    children?: ReactNode,
+    name?: string
+    description?: string
 }
 
-const MarkerComponent: FC<MarkerProps> = ({position, icon, ...props}) => {
+const MarkerComponent: FC<MarkerProps> = ({position, icon, name, description}) => {
     return useMemo(()=>(
-        icon ?
         <Marker position={position} icon={icon}>
             <Popup>
                 <div>
-                    A pretty CSS3 popup. <br/> Easily customizable.
+                    {name || 'A pretty CSS3 popup.'} <br/> {description || 'Easily customizable'}.
                 </div>
             </Popup>
         </Marker>
-            : <Marker position={position}>
-                <Popup>
-                    <div>
-                        A pretty CSS3 popup. <br/> Easily customizable.
-                    </div>
-                </Popup>
-            </Marker>
-    ),[icon, position])
+    ),[description, icon, name, position])
 }
 
-export default MarkerComponent;
+export default memo(MarkerComponent);
