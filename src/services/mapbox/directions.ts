@@ -3,7 +3,7 @@ import {LatLngLiteral} from 'leaflet';
 
 import axios from './../axios'
 import {manageRoutes, manageWaypoints} from './auxiliary/dataCleaner'
-import {Direction, DirectionsParams} from './interfaces';
+import {Direction, DirectionsProps} from './interfaces';
 import {MAPBOX_TOKEN} from '../credentials';
 
 const isLatLngLiteral = (data: object): data is LatLngLiteral => {
@@ -28,7 +28,6 @@ const validateCoordinates = (coordinates: LatLngLiteral | Array<LatLngLiteral>):
 
     else {
         for (let item of coordinates) {
-            console.log('recursive ON')
             flag = validateCoordinates(item)
         }
     }
@@ -36,7 +35,7 @@ const validateCoordinates = (coordinates: LatLngLiteral | Array<LatLngLiteral>):
     return flag
 }
 
-const useDirection = ({target,departure,alternatives,steps,profile}: DirectionsParams) => {
+const useDirection = ({target,departure,alternatives,steps,profile}: DirectionsProps) => {
     const [direction, setDirection] = useState<Direction>()
     const [url, setUrl] = useState<string>()
 
