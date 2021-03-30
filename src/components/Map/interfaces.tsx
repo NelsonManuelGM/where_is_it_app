@@ -13,7 +13,7 @@ export interface MapProps {
     target?: Array<LatLngLiteral>,
     children?: ReactNode,
     center: LatLngLiteral,
-    direction?: Array<LatLngTuple>
+    direction: Array<LatLngTuple>
 }
 
 export interface Place {

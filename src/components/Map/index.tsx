@@ -35,7 +35,8 @@ const MapComponent: FC<MapProps> = ({places, zoom, center, direction}) => {
     }, [center, zoom])
 
     return <div className={customStyle.mapStyle} style={{margin: '-8px'}}>
-        <MapContainer zoom={zoom} className={customStyle.mapStyle} zoomAnimation={true} scrollWheelZoom={true} zoomControl={false}
+        <MapContainer zoom={zoom} className={customStyle.mapStyle} zoomAnimation={true} scrollWheelZoom={true}
+                      zoomControl={false}
                       whenCreated={whenCreatedHandler}>
             <TileLayer
                 attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
@@ -45,16 +46,17 @@ const MapComponent: FC<MapProps> = ({places, zoom, center, direction}) => {
                 tileSize={512}
                 zoomOffset={-1}
             />
-
-            <MarkerComponent position={center} icon={centerIcon}/>
+            {
+                center && <MarkerComponent position={center} icon={centerIcon}/>
+            }
             {
                 places && places.map((item: any, index: number) => {
                     return <MarkerComponent position={item.coordinate} key={index} icon={optionIcon}/>
                 })
             }
             {
-                direction && <Polyline pathOptions={{color: palette.error.main, weight: 5}}
-                                       positions={direction}/>
+                direction && direction.length > 0 && <Polyline pathOptions={{color: palette.error.main, weight: 5}}
+                                                               positions={direction}/>
             }
         </MapContainer>
     </div>
