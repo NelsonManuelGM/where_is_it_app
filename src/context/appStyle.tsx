@@ -10,9 +10,12 @@ const AppStyle = createGlobalStyle`
   .MuiDrawer-paper{
     background: ${theme.palette.grayscale.dark};
     color: ${theme.palette.grayscale.light};
-    opacity: 94%;
-    width: 16rem;
-    box-shadow: 0 1px 3px 2px ${theme.palette.grayscale.dark};
+    opacity: 90%;
+    width: 18rem;
+    box-shadow: 0 1px 2px 1px ${theme.palette.grayscale.dark};
+  }
+  .MuiTypography-colorTextSecondary {
+    color: ${theme.palette.grayscale.main};
   }
 `;
 
