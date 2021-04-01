@@ -51,7 +51,7 @@ const useDirection = ({target,departure,alternatives,steps,profile}: DirectionsP
 
     useEffect(() => {
         if (coordinates) {
-            setUrl(`${profile}/${coordinates}?alternatives=${alternatives}&geometries=geojson&steps=${steps}&access_token=${MAPBOX_TOKEN}`)
+            setUrl(`${profile}/${coordinates}?alternatives=${alternatives}&geometries=geojson&steps=${steps}&bearings=60,45;45,45&overview=full&access_token=${MAPBOX_TOKEN}`)
         }
     }, [coordinates, alternatives, profile, steps])
 

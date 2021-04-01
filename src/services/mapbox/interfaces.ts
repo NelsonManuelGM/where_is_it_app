@@ -26,6 +26,7 @@ export interface Maneuver {
     bearing_before: number,
     location: LatLngTuple,
     type: string,
+    modifier?: string,
     instruction: string
 }
 
@@ -36,6 +37,7 @@ export interface Geometry {
 
 export interface Step {
     driving_side?: string,
+    destinations?:string,
     mode: string,
     duration: number,
     name?: string,
