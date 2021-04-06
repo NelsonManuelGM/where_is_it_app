@@ -1,8 +1,10 @@
-import useGetToken from './CreateToken';
-import useGetCurrentLocation from './GetCurrentLocation';
+import useGetToken from './createToken';
+import useGetCurrentLocation from './getCurrentLocation';
+import {useDirection} from './mapbox'
 
 
 export {
     useGetCurrentLocation,
-    useGetToken
+    useGetToken,
+    useDirection
 }
