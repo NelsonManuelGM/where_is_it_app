@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 
 export interface ErrorNotificationProps {
-    error: string,
+    error?: string,
     children?: ReactNode,
 }
