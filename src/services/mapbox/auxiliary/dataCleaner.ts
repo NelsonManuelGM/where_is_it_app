@@ -20,8 +20,8 @@ const manageManeuver = (data: Maneuver): Maneuver => {
         bearing_before: data.bearing_before,
         location: [data.location[1], data.location[0]],
         instruction: data.instruction,
-        type: data.type
-
+        type: data.type,
+        modifier:data.modifier
     }
 }
 
@@ -31,6 +31,7 @@ const manageSteps = (data: Array<Step>): Array<Step> => {
     data.forEach((item: Step) => {
         response.push({
             driving_side: item.driving_side,
+            destinations: item.destinations,
             mode: item.mode,
             duration: item.duration,
             name: item.name,
