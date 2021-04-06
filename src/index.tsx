@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {ThemeProvider} from '@material-ui/core/styles';
 import {theme} from './context/theme';
 import AppStyle from './context/appStyle';
+import 'fontsource-roboto';
 
 ReactDOM.render(
     <React.StrictMode>
