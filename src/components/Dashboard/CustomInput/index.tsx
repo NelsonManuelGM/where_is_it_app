@@ -15,7 +15,7 @@ const Cover = styled.div`
   flex-direction: row;
   align-items: center;
 
-  z-index: 500;
+  z-index: 450;
   position: absolute;
 
   .MuiInputBase-input {
@@ -62,7 +62,7 @@ const CustomInput: FC<CustomInputParams> = ({onSetTarget}) => {
                     color: theme.palette.grayscale.light,
                     background: theme.palette.grayscale.dark,
                     opacity: '85%',
-                    borderRadius: '6px',
+                    borderRadius: '0px',
                     padding: '0.5rem',
                     height: '130px',
                     margin: '0 0 1rem 0.5rem',
