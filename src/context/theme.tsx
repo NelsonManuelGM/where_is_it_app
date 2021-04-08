@@ -55,15 +55,17 @@ const customStyles = makeStyles({
         margin:'0 0.5rem'
     },
     dashboardStyle: {
-        boxShadow: `0 1px 3px 2px ${theme.palette.grayscale.main}`,
         color: theme.palette.grayscale.light,
         background: theme.palette.grayscale.dark,
         opacity: '85%',
-        borderRadius: '6px',
         padding: '0.5rem',
         zIndex: 500,
         position: 'absolute'
     },
+    drawerSelectedItem: {
+        background: theme.palette.warning.main,
+
+    }
 });
 
 
