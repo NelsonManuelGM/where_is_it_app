@@ -11,6 +11,7 @@ export interface NavigationManeuver {
 export interface NavigatorProps {
     navigation?: NavigationManeuver,
     children?: ReactChildren,
-    onClickBox: () => void
+    onClickBox: () => void,
+    responsive:boolean
 }
 
