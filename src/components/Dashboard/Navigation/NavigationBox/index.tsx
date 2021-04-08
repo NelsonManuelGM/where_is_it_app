@@ -10,7 +10,6 @@ import SignalGenerator from "../NavigationDrawer/SignalGenerator";
 const Cover = styled.div`
   right: 25px;
   margin: 1rem 1rem;
-  width: 260px;
   max-height: 60px;
   min-height: 40px;
   display: flex;
@@ -20,10 +19,9 @@ const Cover = styled.div`
   cursor: pointer;
 `
 
-const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
+const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive}) => {
     const theme = useTheme()
     const {navigationIcon, dashboardStyle} = customStyles()
-    // const [navigate, setNavigate] = useState(navigation || {type:'departure',modifier:'straight', instruction:undefined})
 
 
     // TODO separate this function and the one in the drawer to an external file
@@ -38,7 +36,8 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
         return value.join('\n')
     }
 
-    return <Cover theme={theme} className={dashboardStyle} onClick={onClickBox}>
+    return <Cover theme={theme} className={dashboardStyle} onClick={onClickBox}
+                  style={{width: responsive ? '80px' : '260px'}}>
         {
             navigation ? <div style={{
                     display: "flex",
@@ -48,13 +47,15 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
                     width: '100%'
                 }}>
                     <ArrowBackIos fontSize={'small'} style={{margin: '0 0.5rem'}}/>
-                    <div>
-                        <Typography variant={'body2'}>{navigation.instruction}</Typography>
+                    {
+                        !responsive && <>
+                            <Typography variant={'body2'}>{navigation.instruction}</Typography>
 
-                        <Typography variant={'caption'} style={{color: theme.palette.grayscale.main}}>{
-                            handleStepString(navigation.name, navigation.destination)
-                        }</Typography>
-                    </div>
+                            <Typography variant={'caption'} style={{color: theme.palette.grayscale.main}}>{
+                                handleStepString(navigation.name, navigation.destination)
+                            }</Typography>
+                        </>
+                    }
                     {
                         SignalGenerator({
                             type: navigation.type,
