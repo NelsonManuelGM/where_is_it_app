@@ -7,9 +7,8 @@ import {customStyles} from "../../../../context/theme";
 import {NavigatorProps} from "./interfaces";
 import SignalGenerator from "../NavigationDrawer/SignalGenerator";
 
-const Cover = styled.div`
-  right: 25px;
-  margin: 1rem 1rem;
+const Cover = styled.div` 
+  top:20px;
   max-height: 60px;
   min-height: 40px;
   display: flex;
