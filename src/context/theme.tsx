@@ -60,7 +60,7 @@ const customStyles = makeStyles({
         opacity: '85%',
         padding: '0.5rem',
         zIndex: 500,
-        position: 'absolute'
+        position: 'absolute',
     },
     drawerSelectedItem: {
         background: theme.palette.warning.main,
