@@ -9,6 +9,7 @@ import SignalGenerator from "../NavigationDrawer/SignalGenerator";
 
 const Cover = styled.div` 
   top:20px;
+  right: 25px;
   max-height: 60px;
   min-height: 40px;
   display: flex;
