@@ -1,13 +1,13 @@
 import {FC, memo} from "react";
 import {Add, Remove} from "@material-ui/icons";
-import {customStyles} from "../../../context/theme";
 import styled from "styled-components";
+
+import {customStyles} from "../../../context/theme";
 import {ZoomButtonProps} from "./interfaces";
 
 const Cover = styled.div`
   right: 25px;
   bottom: 50px;
-  margin: 1rem 1rem;
   width: 40px;
   height: 70px;
   display: flex;
