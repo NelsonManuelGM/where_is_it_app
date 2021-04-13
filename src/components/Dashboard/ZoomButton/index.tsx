@@ -7,7 +7,7 @@ import {ZoomButtonProps} from "./interfaces";
 
 const Cover = styled.div`
   right: 25px;
-  bottom: 50px;
+  bottom: 100px;
   width: 40px;
   height: 70px;
   display: flex;

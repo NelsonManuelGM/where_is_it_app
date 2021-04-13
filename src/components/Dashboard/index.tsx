@@ -6,10 +6,11 @@ import MapComponent from "../Map";
 import {places as listPlaces} from "../../services/places";
 import {Profile} from "../../services/mapbox/interfaces";
 import {Place} from "../Map/interfaces";
-import ErrorNotification from "./ErrorNotification";
+import Notification from "./Notification";
 import ZoomButton from "./ZoomButton";
 import CustomInput from "./CustomInput";
 import NavigationComponent from "./Navigation";
+import { NotificationType } from "./Notification/interfaces";
 
 const Dashboard = () => {
 
@@ -20,8 +21,9 @@ const Dashboard = () => {
 
     const [zoom, setZoom] = useState(15);
 
-    const [profile, setProfile] = useState(Profile.driving);
+    const [profile, setProfile] = useState<string>(Profile.driving);
 
+    const [responsiveFlag, setResponsiveFlag] = useState<boolean>(false)
 
 
     const options = {
@@ -53,6 +55,10 @@ const Dashboard = () => {
         }
     }, [])
 
+    const onClickLocomotion = useCallback((value:string)=>{
+        setProfile(value)
+    },[])
+
     useEffect(() => {
         if (!center.lat && !center.lng) return;
 
@@ -62,8 +68,24 @@ const Dashboard = () => {
 
     }, [center, cancelLocationWatch, error]);
 
+    useEffect(() => {
+
+        const updateDimensions = () =>{
+            const width = window.innerWidth
+            if(width < 790){
+                setResponsiveFlag(true)
+            }
+            else{
+                setResponsiveFlag(false)
+            }
+        }
+        window.addEventListener('resize', updateDimensions);
+        return () =>
+            window.removeEventListener('resize',updateDimensions);
+    }, [])
+
     return <>
-        <NavigationComponent direction={direction} location={center}/>
+        <NavigationComponent direction={direction} location={center} responsive={responsiveFlag} onClickLocomotion={onClickLocomotion}/>
 
         <MapComponent places={places} zoom={zoom} center={center}
                       direction={direction?.routes[0].geometry.coordinates!}/>
@@ -71,7 +93,7 @@ const Dashboard = () => {
         <ZoomButton currentZoom={zoom} onChangeZoom={onChangeZoom}/>
 
         {
-            error && <ErrorNotification error={error}/>
+            error && <Notification text={error!} type={NotificationType.error}/>
         }
 
         {/*TODO FOR TEST ONLY*/}
