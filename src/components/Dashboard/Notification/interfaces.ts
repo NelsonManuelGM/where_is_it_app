@@ -1,7 +1,7 @@
 import {ReactNode} from "react";
 
 export interface NotificationProps {
-    text: string,
+    text?: string,
     type: NotificationType
     children?: ReactNode,
 }

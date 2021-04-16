@@ -1,28 +1,38 @@
-import {FC, memo} from "react";
-import styled from "styled-components";
-import {useTheme} from "@material-ui/core";
-import {AlertTitle} from "@material-ui/lab";
-import Alert from "@material-ui/lab/Alert";
+import React, { FC, memo } from 'react';
+import styled from 'styled-components';
+import { Collapse, IconButton } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
 
-import {NotificationProps} from "./interfaces";
+import { NotificationProps } from "./interfaces";
 import { customStyles } from "../../../context/theme";
 
-const CustomAlert = styled(Alert)`
+const CustomCollapse = styled(Collapse)`
     bottom: 40px;
-    left: 20px;
-    background-color: ${({theme})=>theme.palette.grayscale.dark};
+    left: 50px;
     border-radius:0;
-    color: ${({theme})=>theme.palette.grayscale.light}
 `;
 
-const Notification: FC<NotificationProps> = ({text, type}) => {
-    const theme = useTheme();
-    const {dashboardStyle} = customStyles()
-    
-    return <CustomAlert severity={type} className={dashboardStyle} theme={theme}>
-        <AlertTitle>Finding your location</AlertTitle>
-        <p style={{margin:0}}>{text}</p>
-    </CustomAlert>
+const Notification: FC<NotificationProps> = ({ text, type }) => {
+    const { dashboardStyle } = customStyles()
+    const [open, setOpen] = React.useState(text ? true : false);
+
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
+    return <CustomCollapse in={open} className={dashboardStyle}>
+        <Alert severity={type} action={
+            <IconButton aria-label="close" color="inherit" size="small" onClick={handleClose} >
+                <CloseIcon fontSize="inherit" />
+            </IconButton>
+        } style={{ backgroundColor: 'unset', color: 'white' }}>
+            {text}
+        </Alert>
+    </CustomCollapse>
 }
 
 export default memo(Notification)

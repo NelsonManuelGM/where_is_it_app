@@ -11,7 +11,7 @@ const AppStyle = createGlobalStyle`
     background: ${theme.palette.grayscale.dark};
     color: ${theme.palette.grayscale.light};
     opacity: 90%;
-    width: 18rem;
+    width: 20rem;
   }
   .MuiTypography-colorTextSecondary {
     color: ${theme.palette.grayscale.main};
