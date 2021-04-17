@@ -15,11 +15,12 @@ const Cover = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-bottom:5px;
 `
 
 const NavigationBox: FC<NavigatorProps> = ({ navigation, onClickBox, responsive }) => {
     const theme = useTheme()
-    const { navigationIcon } = customStyles()
+    const { navigationIcon, dashboardStyle } = customStyles()
 
 
     // TODO separate this function and the one in the drawer to an external file
@@ -34,7 +35,7 @@ const NavigationBox: FC<NavigatorProps> = ({ navigation, onClickBox, responsive 
         return value.join('\n')
     }
 
-    return <Cover theme={theme} onClick={onClickBox}
+    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}
         style={{ width: responsive ? '80px' : '260px' }}>
         {
             navigation ? <div style={{
