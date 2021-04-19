@@ -1,15 +1,30 @@
-import React, { FC, memo } from "react";
-import { Drawer, IconButton } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
-import { ProductRequestDrawerProps } from "./interfaces";
+import React, {FC, memo} from "react";
+import {Drawer, useTheme} from "@material-ui/core";
+import {Close} from "@material-ui/icons";
+import styled from "styled-components";
 
-const ProductRequestDrawer: FC<ProductRequestDrawerProps> = ({ open, onCloseDrawer }) => {
+import {ProductRequestDrawerProps} from "./interfaces";
 
-    return <Drawer anchor={"left"} open={open} onClose={onCloseDrawer}>
-        <IconButton aria-label="delete" size="small" style={{ padding: '6px 6px 0 0' }}>
-            <Close fontSize="inherit" style={{ color: 'white', marginLeft: '90%' }} onClick={onCloseDrawer} />
-        </IconButton>
-    </Drawer>
+const CustomDrawer = styled(Drawer)`
+  .MuiPaper-root {
+    background-color: ${({theme}) => theme.palette.grayscale.darkGray};
+    opacity: 90%;
+    width: 350px;
+  }
+`;
+
+const ProductRequestDrawer: FC<ProductRequestDrawerProps> = ({open, onCloseDrawer}) => {
+    const theme = useTheme()
+
+    return <CustomDrawer anchor={"left"} open={open} onClose={onCloseDrawer} theme={theme}>
+        <Close fontSize="inherit" onClick={onCloseDrawer}
+               style={{
+                   color: theme.palette.grayscale.main,
+                   marginLeft: '90%',
+                   padding: '10px 8px 0 0',
+                   cursor: 'pointer'
+               }}/>
+    </CustomDrawer>
 }
 
 export default memo(ProductRequestDrawer)
