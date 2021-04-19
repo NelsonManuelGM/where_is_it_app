@@ -1,151 +1,141 @@
 import {
+    ArrowUpwardOutlined,
     AutorenewOutlined,
     CallMadeOutlined,
-    CallMergeOutlined,
     Help,
     PanToolOutlined,
     PinDropOutlined,
     PlaceOutlined,
+    RedoOutlined,
     SettingsBackupRestoreOutlined,
     SubdirectoryArrowLeftOutlined,
     SubdirectoryArrowRightOutlined,
     SyncOutlined,
-    RedoOutlined,
-    UndoOutlined,
-    ArrowUpwardOutlined
+    UndoOutlined
 } from "@material-ui/icons";
 
 import {SignalGeneratorProps} from "./interfaces";
 
-const SignalGenerator = ({type, modifier, iconCssClass}:SignalGeneratorProps) => {
+const SignalGenerator = ({type, modifier}: SignalGeneratorProps) => {
 
     if (type === 'arrive') {
         // if (modifier === 'left') //TODO change icon for this
-        return <PlaceOutlined className={iconCssClass} fontSize='large'/>
+        return <PlaceOutlined fontSize='large'/>
         // if (modifier === 'right') //TODO change icon for this
         //     return <PlaceOutlined className={navigationIcon} fontSize='large'/>
-    }
-    else if (type === 'depart') {
-        return <PinDropOutlined className={iconCssClass} fontSize='large'/>
-    }
-    else if (type === 'end of road') {
+    } else if (type === 'depart') {
+        return <PinDropOutlined fontSize='large'/>
+    } else if (type === 'end of road') {
         if (modifier === 'left') {
-            return <SubdirectoryArrowLeftOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowLeftOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
         if (modifier === 'right') {
-            return <SubdirectoryArrowRightOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowRightOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
-        return <PanToolOutlined className={iconCssClass} fontSize='large'/>
-    }
-    else if (type === 'on ramp') {
+        return <PanToolOutlined fontSize='large'/>
+    } else if (type === 'on ramp') {
         if (modifier === 'left') {
-            return <SubdirectoryArrowLeftOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowLeftOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
         if (modifier === 'right') {
-            return <SubdirectoryArrowRightOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowRightOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
-        if (modifier === 'slight right'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'slight right') { //TODO change icon for this
+            return <CallMadeOutlined fontSize='large'/>
+        } else {//if (modifier === 'slight left') //TODO change icon for this
+            return <CallMadeOutlined style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
         }
-        else {//if (modifier === 'slight left') //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
-        }
-    }
-    else if (type === 'turn') {
+    } else if (type === 'turn') {
         if (modifier === 'right') {
-            return <SubdirectoryArrowRightOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowRightOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
-        if (modifier === 'slight right'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'slight right') { //TODO change icon for this
+            return <CallMadeOutlined fontSize='large'/>
         }
         if (modifier === 'left') {
-            return <SubdirectoryArrowLeftOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowLeftOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
-        if (modifier === 'slight left'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
+        if (modifier === 'slight left') { //TODO change icon for this
+            return <CallMadeOutlined style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
         }
-        if (modifier === 'straight'){ //TODO change icon for this
-            return <ArrowUpwardOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'straight') { //TODO change icon for this
+            return <ArrowUpwardOutlined fontSize='large'/>
         }
-    }
-    else if (type === 'off ramp') {
-        if (modifier === 'slight right'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'sharp right') { //TODO change icon for this
+            return <SubdirectoryArrowRightOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
-        else {//if (modifier === 'slight left') //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
+        if (modifier === 'sharp left') { //TODO change icon for this
+            return <SubdirectoryArrowLeftOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
-    }
-    else if (type === 'fork') {
-        if (modifier === 'slight right'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+    } else if (type === 'off ramp') {
+        if (modifier === 'slight right') { //TODO change icon for this
+            return <CallMadeOutlined fontSize='large'/>
+        } else {//if (modifier === 'slight left') //TODO change icon for this
+            return <CallMadeOutlined style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
         }
-        else {//if (modifier === 'slight left') //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
+    } else if (type === 'fork') {
+        if (modifier === 'slight right') { //TODO change icon for this
+            return <CallMadeOutlined fontSize='large'/>
+        } else {//if (modifier === 'slight left') //TODO change icon for this
+            return <CallMadeOutlined style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
         }
-    }
-    else if (type === 'roundabout') {
+    } else if (type === 'roundabout') {
         if (modifier === 'slight right' || modifier === 'right') {
-            return <AutorenewOutlined className={iconCssClass} fontSize='large'/>
+            return <AutorenewOutlined fontSize='large'/>
         }
         if (modifier === 'slight left' || modifier === 'left') {
-            return <SyncOutlined className={iconCssClass} fontSize='large'/>
+            return <SyncOutlined fontSize='large'/>
         }
 
         if (modifier === 'straight') {
-            return <ArrowUpwardOutlined className={iconCssClass} fontSize='large'/>
+            return <ArrowUpwardOutlined fontSize='large'/>
         }
-    }
-    else if (type === 'roundabout turn') { 
-        if (modifier === 'right' ) {
-            return <RedoOutlined className={iconCssClass} fontSize='large'/>
+    } else if (type === 'roundabout turn') {
+        if (modifier === 'right') {
+            return <RedoOutlined fontSize='large'/>
         }
-        if (modifier === 'left' ) {
-            return <UndoOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'left') {
+            return <UndoOutlined fontSize='large'/>
         }
-        if (modifier === 'slight right'){ //TODO change icon for this
-            return <RedoOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'slight right') { //TODO change icon for this
+            return <RedoOutlined fontSize='large'/>
+        } else {  //(modifier === 'slight left')
+            return <UndoOutlined fontSize='large'/>
         }
-        else{  //(modifier === 'slight left')
-            return <UndoOutlined className={iconCssClass} fontSize='large'/>
-        }
-    }
-    else if (type === 'new name') { //TODO to change soon 
+    } else if (type === 'new name') { //TODO to change soon
         if (modifier === 'slight right') {
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+            return <CallMadeOutlined fontSize='large'/>
         }
         if (modifier === 'slight left') {
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+            return <CallMadeOutlined fontSize='large'/>
         }
         // if (modifier === 'slight left' || modifier === 'left') {
-        //     return <SyncOutlined className={iconCssClass} fontSize='large'/>
+        //     return <SyncOutlined    fontSize='large'/>
         // }
         if (modifier === 'straight') {
-            return <ArrowUpwardOutlined className={iconCssClass} fontSize='large'/>
+            return <ArrowUpwardOutlined fontSize='large'/>
         }
-    }
-    else if(type === 'continue'){
+    } else if (type === 'continue') {
         if (modifier === 'left') {
-            return <SubdirectoryArrowLeftOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowLeftOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
         if (modifier === 'right') {
-            return <SubdirectoryArrowRightOutlined className={iconCssClass} style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
+            return <SubdirectoryArrowRightOutlined style={{transform: 'rotateX(180deg)'}} fontSize='large'/>
         }
         if (modifier === 'uturn') {
-            return <SettingsBackupRestoreOutlined className={iconCssClass} fontSize='large'/>
+            return <SettingsBackupRestoreOutlined fontSize='large'/>
         }
-        if (modifier === 'slight right'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'slight right') { //TODO change icon for this
+            return <CallMadeOutlined fontSize='large'/>
         }
-        if (modifier === 'slight left'){ //TODO change icon for this
-            return <CallMadeOutlined className={iconCssClass} style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
+        if (modifier === 'slight left') { //TODO change icon for this
+            return <CallMadeOutlined style={{transform: 'rotateY(180deg)'}} fontSize='large'/>
         }
-        if (modifier === 'straight'){ //TODO change icon for this
-            return <ArrowUpwardOutlined className={iconCssClass} fontSize='large'/>
+        if (modifier === 'straight') { //TODO change icon for this
+            return <ArrowUpwardOutlined fontSize='large'/>
         }
-    }
-    else { //(modifier==='straight')
-        return <Help className={iconCssClass} fontSize='large'/>
+    } else { //(modifier==='straight')
+        return <Help fontSize='large'/>
     }
 }
 
