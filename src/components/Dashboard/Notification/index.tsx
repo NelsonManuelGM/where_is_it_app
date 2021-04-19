@@ -5,7 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 
 import {NotificationProps} from "./interfaces";
-import {customStyles} from "../../../context/theme";
+import {customStyles} from "../../../styles/theme";
 
 const CustomCollapse = styled(Collapse)`
   position: absolute;

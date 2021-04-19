@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {Close} from "@material-ui/icons";
 
 
-import {customStyles} from "../../../../context/theme";
+import {customStyles} from "../../../../styles/theme";
 import {NavigationDrawerParams} from "./interfaces";
 import {Step} from "../../../../services/mapbox/interfaces";
 import SignalGenerator from "./SignalGenerator";

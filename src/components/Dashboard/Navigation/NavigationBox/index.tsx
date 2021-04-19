@@ -3,7 +3,7 @@ import {ArrowBackIos} from "@material-ui/icons";
 import styled from "styled-components";
 import {CircularProgress, Typography, useTheme} from "@material-ui/core";
 
-import {customStyles} from "../../../../context/theme";
+import {customStyles} from "../../../../styles/theme";
 import {NavigatorProps} from "./interfaces";
 import SignalGenerator from "../NavigationDrawer/SignalGenerator";
 import {Step} from "../../../../services/mapbox/interfaces";

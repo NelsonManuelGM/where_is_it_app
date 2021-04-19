@@ -2,7 +2,7 @@ import {FC, memo, useState} from "react";
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@material-ui/core";
 import {DirectionsBikeOutlined, DirectionsWalkOutlined, DriveEtaOutlined} from "@material-ui/icons";
 
-import {customStyles} from "../../../../context/theme";
+import {customStyles} from "../../../../styles/theme";
 import {LocomotionPickerProps} from "./interfaces";
 import {Profile} from "../../../../services/mapbox/interfaces";
 import styled from "styled-components";

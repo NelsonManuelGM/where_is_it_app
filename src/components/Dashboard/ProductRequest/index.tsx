@@ -2,7 +2,7 @@ import React, {memo, useCallback, useState} from "react";
 import {Menu} from "@material-ui/icons";
 import styled from "styled-components";
 
-import {customStyles} from "../../../context/theme";
+import {customStyles} from "../../../styles/theme";
 import ProductRequestDrawer from "./ProductRequestDrawer";
 
 

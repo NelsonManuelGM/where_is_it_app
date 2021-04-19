@@ -8,7 +8,7 @@ import L from 'leaflet';
 import MarkerComponent from './marker';
 import {MapProps} from './interfaces';
 import {MAPBOX_TOKEN} from '../../services/credentials';
-import {customStyles} from "../../context/theme";
+import {customStyles} from "../../styles/theme";
 
 const MapComponent: FC<MapProps> = ({places, zoom, center, direction}) => {
     const customStyle = customStyles();
