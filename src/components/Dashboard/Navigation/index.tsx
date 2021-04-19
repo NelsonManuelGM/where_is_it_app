@@ -1,16 +1,27 @@
 import {FC, memo, useCallback, useEffect, useState} from "react";
+import styled from "styled-components";
 
 import NavigationBox from "./NavigationBox";
 import NavigationDrawer from "./NavigationDrawer";
 import {NavigationComponentProps} from "./interfaces";
-import {NavigationManeuver} from "./NavigationBox/interfaces";
 import distanceBetweenPoint from "../../../services/distanceBetweenPoint";
 import LocomotionPicker from "./LocomotioPicker";
+import {Step} from "../../../services/mapbox/interfaces";
+
+const Wrapper = styled.div`
+  top: 20px;
+  right: 25px;
+  position: absolute;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
 
 const NavigationComponent: FC<NavigationComponentProps> = ({direction, location, responsive, onClickLocomotion}) => {
     const [currentStep, setCurrentStep] = useState<number>()
 
-    const [navigation, setNavigation] = useState<NavigationManeuver>();
+    const [navigation, setNavigation] = useState<Step>();
 
     const [drawerFlag, setDrawerFlag] = useState<boolean>(false)
 
@@ -36,21 +47,17 @@ const NavigationComponent: FC<NavigationComponentProps> = ({direction, location,
 
     useEffect(() => {
         if (currentStep !== undefined) {
-            setNavigation({
-                type: direction?.routes[0].legs[0].steps[currentStep].maneuver.type!,
-                modifier: direction?.routes[0].legs[0].steps[currentStep].maneuver.modifier,
-                instruction: direction?.routes[0].legs[0].steps[currentStep].maneuver.instruction,
-                name: direction?.routes[0].legs[0].steps[currentStep].name,
-                destination: direction?.routes[0].legs[0].steps[currentStep].destinations,
-            })
+            setNavigation(direction?.routes[0].legs[0].steps[currentStep])
         }
     }, [currentStep, direction?.routes])
 
     return <>
-        <NavigationBox navigation={navigation} onClickBox={onClickBox} responsive={responsive}/>
-        {
-            navigation && <LocomotionPicker onClickLocomotion={onClickLocomotion}/>
-        }
+        <Wrapper>
+            <NavigationBox navigation={navigation} onClickBox={onClickBox} responsive={responsive}/>
+            {
+                navigation && <LocomotionPicker onClickLocomotion={onClickLocomotion}/>
+            }
+        </Wrapper>
         <NavigationDrawer open={drawerFlag && currentStep !== undefined} onDrawerClose={onClickBox}
                           route={direction?.routes[0]} currentStep={currentStep}/>
     </>
