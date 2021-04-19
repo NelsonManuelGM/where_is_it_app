@@ -9,21 +9,24 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: 130px;
-  
-  .MuiBottomNavigation-root{
+
+  .MuiBottomNavigation-root {
     background-color: unset;
     height: unset;
   }
-  .MuiBottomNavigationAction-root{
+
+  .MuiBottomNavigationAction-root {
     max-width: unset;
     min-width: unset;
     color: unset;
   }
-  .MuiBottomNavigationAction-root.Mui-selected{
-    color: ${({theme})=>theme.palette.warning.main};
+
+  .MuiBottomNavigationAction-root.Mui-selected {
+    color: ${({theme}) => theme.palette.warning.main};
     padding-top: 8px;
   }
-  .MuiBottomNavigationAction-root.MuiBottomNavigationAction-iconOnly{
+
+  .MuiBottomNavigationAction-root.MuiBottomNavigationAction-iconOnly {
     padding-top: 8px;
   }
 `;
@@ -34,7 +37,7 @@ const LocomotionPicker: FC<LocomotionPickerProps> = ({onClickLocomotion}) => {
 
     const [value, setValue] = useState(0)
 
-    return <Wrapper style={{padding:0}} className={dashboardStyle} theme={theme}>
+    return <Wrapper style={{padding: 0}} className={dashboardStyle} theme={theme}>
         <BottomNavigation value={value} onChange={(event, newValue) => {
             setValue(newValue);
         }}>
