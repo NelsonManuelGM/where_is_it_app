@@ -20,7 +20,7 @@ const Cover = styled.div`
 
 const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive}) => {
     const theme = useTheme()
-    const {navigationIcon, dashboardStyle} = customStyles()
+    const {dashboardStyle} = customStyles()
 
 
     // TODO separate this function and the one in the drawer to an external file
@@ -63,7 +63,6 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive})
                         SignalGenerator({
                             type: navigation.maneuver.type,
                             modifier: navigation.maneuver.modifier,
-                            iconCssClass: navigationIcon
                         })
                     }
                 </div>
