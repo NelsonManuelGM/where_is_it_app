@@ -9,11 +9,15 @@ import MarkerComponent from './marker';
 import {MapProps} from './interfaces';
 import {MAPBOX_TOKEN} from '../../services/credentials';
 import {customStyles} from "../../styles/theme";
+import {useAppSelector} from "../../context/hooks";
 
-const MapComponent: FC<MapProps> = ({places, zoom, center, direction}) => {
+const MapComponent: FC<MapProps> = ({places, center, direction}) => {
     const customStyle = customStyles();
     const {palette} = useTheme()
     const mapRef = useRef<L.Map>()
+
+    const {zoom} = useAppSelector(state=>state.map)
+
 
     const centerIcon = useMemo(() => L.divIcon({
         html: renderToStaticMarkup(
