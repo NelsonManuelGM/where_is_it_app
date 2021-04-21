@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   align-items: flex-end;
 `;
 
-const NavigationComponent: FC<NavigationComponentProps> = ({direction, location, responsive, onClickLocomotion}) => {
+const NavigationComponent: FC<NavigationComponentProps> = ({direction, location, responsive}) => {
     const [currentStep, setCurrentStep] = useState<number>()
 
     const [navigation, setNavigation] = useState<Step>();
@@ -55,7 +55,7 @@ const NavigationComponent: FC<NavigationComponentProps> = ({direction, location,
         <Wrapper>
             <NavigationBox navigation={navigation} onClickBox={onClickBox} responsive={responsive}/>
             {
-                navigation && <LocomotionPicker onClickLocomotion={onClickLocomotion}/>
+                navigation && <LocomotionPicker/>
             }
         </Wrapper>
         <NavigationDrawer open={drawerFlag && currentStep !== undefined} onDrawerClose={onClickBox}

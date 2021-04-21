@@ -1,9 +1,9 @@
-import {FC, memo, useState} from "react";
+import {memo, useState} from "react";
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@material-ui/core";
 import {DirectionsBikeOutlined, DirectionsWalkOutlined, DriveEtaOutlined} from "@material-ui/icons";
+import {useDispatch} from "react-redux";
 
 import {customStyles} from "../../../../styles/theme";
-import {LocomotionPickerProps} from "./interfaces";
 import {Profile} from "../../../../services/mapbox/interfaces";
 import styled from "styled-components";
 
@@ -31,9 +31,16 @@ const Wrapper = styled.div`
   }
 `;
 
-const LocomotionPicker: FC<LocomotionPickerProps> = ({onClickLocomotion}) => {
+const LocomotionPicker = () => {
     const {dashboardStyle} = customStyles()
     const theme = useTheme()
+
+    const dispatch = useDispatch()
+
+
+    const onClickLocomotion = (value: Profile) => {
+        dispatch({type: 'direction/setConfiguration', payload: {profile: value}})
+    }
 
     const [value, setValue] = useState(0)
 

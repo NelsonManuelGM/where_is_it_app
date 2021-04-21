@@ -6,6 +6,4 @@ export interface NavigationComponentProps {
     direction?: Direction,
     location: LatLngLiteral,
     responsive: boolean,
-    onClickLocomotion : (value:string) => void
-
 }
