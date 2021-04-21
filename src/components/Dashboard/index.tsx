@@ -11,15 +11,13 @@ import CustomInput from "./CustomInput";
 
 export interface DashboardProps {
     center: LatLngLiteral,
-    onChangeZoom: (value: number) => void,
     onClickLocomotion: (value: string) => void,
-    zoom: number,
     direction?: Direction,
     error?: string,
     onSetTarget: (value: LatLngLiteral) => void, //for test only
 }
 
-const Dashboard: FC<DashboardProps> = ({center, zoom, onChangeZoom, direction, error, onClickLocomotion, onSetTarget }) => {
+const Dashboard: FC<DashboardProps> = ({center, direction, error, onClickLocomotion, onSetTarget}) => {
 
     const [responsiveFlag, setResponsiveFlag] = useState<boolean>(false)
 
@@ -41,7 +39,7 @@ const Dashboard: FC<DashboardProps> = ({center, zoom, onChangeZoom, direction, e
         <NavigationComponent direction={direction} location={center} responsive={responsiveFlag}
                              onClickLocomotion={onClickLocomotion}/>
 
-        <ZoomButton currentZoom={zoom} onChangeZoom={onChangeZoom}/>
+        <ZoomButton/>
 
         {
             error && <Notification text={error} type={NotificationType.error}/>
