@@ -2,10 +2,10 @@ import {memo, useState} from "react";
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@material-ui/core";
 import {DirectionsBikeOutlined, DirectionsWalkOutlined, DriveEtaOutlined} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
+import styled from "styled-components";
 
 import {customStyles} from "../../../../styles/theme";
 import {Profile} from "../../../../services/mapbox/interfaces";
-import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: 130px;
