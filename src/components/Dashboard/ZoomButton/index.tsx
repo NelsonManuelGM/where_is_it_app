@@ -30,7 +30,6 @@ const ZoomButton = () => {
 
     const onChangeZoom = (flag: boolean) => {
         let _zoom = zoom
-        debugger
         if (flag && zoom < 18) {
             ++_zoom
         }
