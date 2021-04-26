@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import {customStyles} from "../../../../styles/theme";
 import {Profile} from "../../../../services/mapbox/interfaces";
+import {StatusType} from "../../../../context/direction";
 
 const Wrapper = styled.div`
   width: 130px;
@@ -39,6 +40,7 @@ const LocomotionPicker = () => {
 
 
     const onClickLocomotion = (value: Profile) => {
+        dispatch({type: 'direction/setStatus', payload: {status: StatusType.pending}})
         dispatch({type: 'direction/setConfiguration', payload: {profile: value}})
     }
 
