@@ -1,10 +1,10 @@
 import useGetToken from './createToken';
 import useGetCurrentLocation from './getCurrentLocation';
-import {useDirection} from './mapbox'
+import distanceBetweenPoint from "./distanceBetweenPoint";
 
 
 export {
     useGetCurrentLocation,
     useGetToken,
-    useDirection
+    distanceBetweenPoint
 }

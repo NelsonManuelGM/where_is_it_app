@@ -4,7 +4,7 @@ import styled from "styled-components";
 import NavigationBox from "./NavigationBox";
 import NavigationDrawer from "./NavigationDrawer";
 import {NavigationComponentProps} from "./interfaces";
-import distanceBetweenPoint from "../../../services/distanceBetweenPoint";
+import {distanceBetweenPoint} from "../../../services";
 import LocomotionPicker from "./LocomotioPicker";
 import {Route, Step} from "../../../services/mapbox/interfaces";
 import {useAppSelector} from "../../../context/hooks";
