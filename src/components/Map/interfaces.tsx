@@ -1,4 +1,4 @@
-import {LatLngLiteral, LatLngTuple} from "leaflet";
+import {LatLngLiteral} from "leaflet";
 import {ReactNode} from "react";
 
 export interface MapSize {
@@ -9,10 +9,7 @@ export interface MapSize {
 
 export interface MapProps {
     places: Array<Place> | [],
-    target?: Array<LatLngLiteral>,
     children?: ReactNode,
-    center: LatLngLiteral,
-    direction: Array<LatLngTuple>
 }
 
 export interface Place {

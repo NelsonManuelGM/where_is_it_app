@@ -1,9 +1,9 @@
-import {FC, memo, useEffect, useMemo, useRef} from 'react';
+import {FC, memo, useEffect, useMemo, useRef, useState} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {LocationOn, PersonPinCircle} from '@material-ui/icons'
 import {useTheme} from '@material-ui/core';
 import {MapContainer, Polyline, TileLayer} from 'react-leaflet';
-import L from 'leaflet';
+import L, {LatLngTuple} from 'leaflet';
 
 import MarkerComponent from './marker';
 import {MapProps} from './interfaces';
@@ -11,13 +11,23 @@ import {MAPBOX_TOKEN} from '../../services/credentials';
 import {customStyles} from "../../styles/theme";
 import {useAppSelector} from "../../context/hooks";
 
-const MapComponent: FC<MapProps> = ({places, center, direction}) => {
+const MapComponent: FC<MapProps> = ({places}) => {
     const customStyle = customStyles();
     const {palette} = useTheme()
     const mapRef = useRef<L.Map>()
 
     const {zoom} = useAppSelector(state=>state.map)
 
+    const [polyline, setPolyline] = useState<Array<LatLngTuple>>([])
+
+    const {direction, configuration} = useAppSelector(state => state.direction)
+
+
+    useEffect(() => {
+        if (direction) {
+            setPolyline(direction.routes[0].geometry.coordinates)
+        }
+    }, [direction])
 
     const centerIcon = useMemo(() => L.divIcon({
         html: renderToStaticMarkup(
@@ -34,9 +44,9 @@ const MapComponent: FC<MapProps> = ({places, center, direction}) => {
 
     useEffect(() => {
         if (mapRef.current) {
-            mapRef.current.setView(center, zoom);
+            mapRef.current.setView(configuration.departure, zoom);
         }
-    }, [center, zoom])
+    }, [configuration.departure, zoom])
 
     return <div className={customStyle.mapStyle} style={{margin: '-8px'}}>
         <MapContainer zoom={zoom} className={customStyle.mapStyle} zoomAnimation={true} scrollWheelZoom={true}
@@ -51,7 +61,7 @@ const MapComponent: FC<MapProps> = ({places, center, direction}) => {
                 zoomOffset={-1}
             />
             {
-                center && <MarkerComponent position={center} icon={centerIcon}/>
+                configuration.departure && <MarkerComponent position={configuration.departure} icon={centerIcon}/>
             }
             {
                 places && places.map((item: any, index: number) => {
@@ -59,8 +69,8 @@ const MapComponent: FC<MapProps> = ({places, center, direction}) => {
                 })
             }
             {
-                direction && direction.length > 0 && <Polyline pathOptions={{color: palette.error.main, weight: 5}}
-                                                               positions={direction}/>
+                polyline.length > 0 && <Polyline pathOptions={{color: palette.error.main, weight: 5}}
+                                                               positions={polyline}/>
             }
         </MapContainer>
     </div>
