@@ -37,7 +37,7 @@ const initialState: DirectionType = {
         alternatives: false //unnecessary alternative}
     },
     direction: undefined,
-    status: StatusType.pending,
+    status: StatusType.fulfilled,
 }
 
 export const requestDirection = createAsyncThunk(
