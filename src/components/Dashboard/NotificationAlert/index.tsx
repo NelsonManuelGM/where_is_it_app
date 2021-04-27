@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 
 import {useAppSelector} from "../../../context/hooks";
-import {ErrorCode} from "../../../context/slices/error";
+import {ErrorCode} from "../../../context/slices/notification";
 
 const CustomDialog = styled(Dialog)`
   .MuiPaper-root {
@@ -26,7 +26,7 @@ const CustomDialog = styled(Dialog)`
 `;
 
 const NotificationAlert = () => {
-    const {error, type} = useAppSelector(state => state.error)
+    const {notification, type} = useAppSelector(state => state.error)
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme()
@@ -50,7 +50,7 @@ const NotificationAlert = () => {
         <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
         <DialogContent>
             <DialogContentText id="alert-dialog-description">
-                {error}
+                {notification}
                 <br/>
                 Activate your GPS in order to find you current location
             </DialogContentText>
