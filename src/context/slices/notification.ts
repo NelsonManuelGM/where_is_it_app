@@ -2,11 +2,18 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 export enum ErrorCode {
+    //error
     PERMISSION_DENIED = 'PERMISSION_DENIED',
     POSITION_UNAVAILABLE = 'POSITION_UNAVAILABLE',
-    TIMEOUT = 'TIMEOUT',
     API_REQUEST_ERROR = 'API_REQUEST_ERROR',
     GEO_LOCATION_UNSUPPORTED = 'GEO_LOCATION_UNSUPPORTED',
+    TIMEOUT = 'TIMEOUT',
+
+    //warning
+    WARNING = 'WARNING',
+
+    //success
+    SUCCESS = 'SUCCESS',
     NONE = 'NONE',
 }
 
