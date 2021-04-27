@@ -1,5 +1,5 @@
 import React, {FC, memo, useCallback} from "react";
-import {Divider, Drawer, List, ListItem, ListItemIcon, Typography, useTheme} from "@material-ui/core";
+import {Drawer, List, ListItem, ListItemIcon, Typography, useTheme} from "@material-ui/core";
 import styled from "styled-components";
 import {Close} from "@material-ui/icons";
 
@@ -59,7 +59,6 @@ const NavigationDrawer: FC<NavigationDrawerParams> = ({open, onDrawerClose, rout
             {
                 route && route.legs[0].steps.map((step, index) => {
                     return <div style={{paddingTop: '4px', paddingBottom: '6px'}} className={`${index}`} key={index}>
-                        <Divider style={{backgroundColor: theme.palette.grayscale.darkGray}}/>
 
                         <ListItem alignItems="flex-start" >
 
