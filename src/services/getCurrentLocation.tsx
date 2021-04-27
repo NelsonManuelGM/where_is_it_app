@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import {useDispatch} from "react-redux";
 
 import {useAppSelector} from "../context/hooks";
-import {ErrorCode} from "../context/slices/error";
+import {ErrorCode} from "../context/slices/notification";
 
 
 const useGetCurrentLocation = (options: object = {}) => {
@@ -24,23 +24,21 @@ const useGetCurrentLocation = (options: object = {}) => {
                     }
                 }
             })
-            dispatch({type: 'error/changeError', payload: {error: ''}})
+            dispatch({type: 'notification/changeNotification', payload: {notification: ''}})
         }
     },[departure.lat, departure.lng, dispatch])
 
     const handleError = useCallback((error: any) => {
-        console.log('Handeling error')
-        console.log(error)
         if (error) {
             switch (error.code) {
                 case (error.TIMEOUT):
-                    dispatch({type: 'error/changeError', payload: {error: error.message, type: ErrorCode.TIMEOUT}})
+                    dispatch({type: 'notification/changeNotification', payload: {notification: error.message, type: ErrorCode.TIMEOUT}})
                     locationWatchId.current = navigator.geolocation.watchPosition(handleSuccess, handleError, options)
                     break;
                 case (error.PERMISSION_DENIED):
                     dispatch({
-                        type: 'error/changeError',
-                        payload: {error: error.message, type: ErrorCode.PERMISSION_DENIED}
+                        type: 'notification/changeNotification',
+                        payload: {notification: error.message, type: ErrorCode.PERMISSION_DENIED}
                     })
                     break;
             }
@@ -58,8 +56,8 @@ const useGetCurrentLocation = (options: object = {}) => {
             locationWatchId.current = navigator.geolocation.watchPosition(handleSuccess, handleError, options)
         } else {
             dispatch({
-                type: 'error/changeError',
-                payload: {error: "It can't handle geo location", type: ErrorCode.GEO_LOCATION_UNSUPPORTED}
+                type: 'notification/changeNotification',
+                payload: {notification: "It can't handle geo location", type: ErrorCode.GEO_LOCATION_UNSUPPORTED}
             })
 
         }
