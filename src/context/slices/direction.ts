@@ -4,7 +4,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {manageRoutes, manageWaypoints} from "../../services/mapbox/auxiliary/dataCleaner";
 import {getDirection} from "../../services/mapbox/mapboxAPI";
 import {RootState} from "../store";
-import {ErrorCode} from "./error";
+import {ErrorCode} from "./notification";
 
 
 export interface DirectionConfigurationType {
@@ -55,7 +55,7 @@ export const requestDirection = createAsyncThunk(
                 profile: direction.configuration.profile,
                 steps: direction.configuration.steps,
             })
-            thunkAPI.dispatch({type: 'error/changeError', payload:{error:''}})
+            thunkAPI.dispatch({type: 'notification/changeNotification', payload:{notification:''}})
 
             return {
                 routes: manageRoutes(data.routes),
@@ -64,7 +64,7 @@ export const requestDirection = createAsyncThunk(
 
         } catch (error) {
             console.log('direction request error: ', error)
-            thunkAPI.dispatch({type: 'error/changeError', payload:{error:error.message, type: ErrorCode.API_REQUEST_ERROR}})
+            thunkAPI.dispatch({type: 'notification/changeNotification', payload:{notification:error.message, type: ErrorCode.API_REQUEST_ERROR}})
         }
     }
 )

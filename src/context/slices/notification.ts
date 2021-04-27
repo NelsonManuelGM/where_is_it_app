@@ -11,27 +11,27 @@ export enum ErrorCode {
 }
 
 export interface MapType {
-    error: string,
+    notification: string,
     type: ErrorCode
 }
 
 const initialState: MapType = {
-    error: '',
+    notification: '',
     type: ErrorCode.NONE
 }
 
-export const errorSlice = createSlice({
-    name: 'error',
+export const notificationSlice = createSlice({
+    name: 'notification',
     initialState: initialState,
     reducers: {
-        changeError: (state, action: PayloadAction<MapType>) => {
-            state.error = action.payload.error
+        changeNotification: (state, action: PayloadAction<MapType>) => {
+            state.notification = action.payload.notification
             state.type = action.payload.type || ErrorCode.NONE
         },
     }
 })
 
 
-export const {changeError} = errorSlice.actions
+export const {changeNotification} = notificationSlice.actions
 
-export default errorSlice.reducer
+export default notificationSlice.reducer

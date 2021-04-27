@@ -3,13 +3,13 @@ import {combineReducers} from "redux";
 import {placesSlice} from './slices/places'
 import {mapSlice} from './slices/map'
 import {directionSlice} from "./slices/direction";
-import {errorSlice} from "./slices/error";
+import {notificationSlice} from "./slices/notification";
 
 const reducer = combineReducers({
     places: placesSlice.reducer,
     map: mapSlice.reducer,
     direction: directionSlice.reducer,
-    error: errorSlice.reducer,
+    error: notificationSlice.reducer,
 })
 
 export const store = configureStore({
