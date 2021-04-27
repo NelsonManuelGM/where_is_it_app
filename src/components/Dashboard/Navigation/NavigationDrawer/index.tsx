@@ -11,9 +11,9 @@ import SignalGenerator from "./SignalGenerator";
 
 const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {
-    background-color: ${({theme}) => theme.palette.grayscale.dark};
+    background-color: ${({theme}) => theme.palette.grayscale.darkGray};
     opacity: 90%;
-    width: 350px;
+    width: 310px;
   }
 `;
 
