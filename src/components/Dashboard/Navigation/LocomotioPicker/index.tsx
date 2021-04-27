@@ -1,4 +1,4 @@
-import {memo, useState} from "react";
+import {memo, useCallback, useState} from "react";
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@material-ui/core";
 import {DirectionsBikeOutlined, DirectionsWalkOutlined, DriveEtaOutlined} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import {customStyles} from "../../../../styles/theme";
 import {Profile} from "../../../../services/mapbox/interfaces";
-import {StatusType} from "../../../../context/direction";
+import {StatusType} from "../../../../context/slices/direction";
 
 const Wrapper = styled.div`
   width: 130px;
@@ -39,10 +39,11 @@ const LocomotionPicker = () => {
     const dispatch = useDispatch()
 
 
-    const onClickLocomotion = (value: Profile) => {
-        dispatch({type: 'direction/setStatus', payload: {status: StatusType.pending}})
+    const onClickLocomotion = useCallback((value: Profile) => {
         dispatch({type: 'direction/setConfiguration', payload: {profile: value}})
-    }
+        dispatch({type: 'direction/setStatus', payload: {status: StatusType.pending}})
+
+    }, [dispatch])
 
     const [value, setValue] = useState(0)
 

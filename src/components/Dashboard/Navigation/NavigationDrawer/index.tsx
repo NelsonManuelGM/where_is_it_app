@@ -58,10 +58,10 @@ const NavigationDrawer: FC<NavigationDrawerParams> = ({open, onDrawerClose, rout
         <List ref={listRef}>
             {
                 route && route.legs[0].steps.map((step, index) => {
-                    return <div style={{paddingTop: '4px', paddingBottom: '6px'}} className={`${index}`}>
+                    return <div style={{paddingTop: '4px', paddingBottom: '6px'}} className={`${index}`} key={index}>
                         <Divider style={{backgroundColor: theme.palette.grayscale.darkGray}}/>
 
-                        <ListItem key={index} alignItems="flex-start" >
+                        <ListItem alignItems="flex-start" >
 
                             <ListItemIcon style={{color: 'white'}}>
                                 {

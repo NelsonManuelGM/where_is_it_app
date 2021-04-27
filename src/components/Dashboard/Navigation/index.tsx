@@ -35,13 +35,13 @@ const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive
     }, [drawerFlag])
 
     useEffect(() => {
-        if (Object.entries(direction).length !== 0) {
+        if (direction) {
             setRoutes(direction.routes[0])
         }
     }, [direction])
 
     useEffect(() => {
-        if (Object.entries(direction).length !== 0) {
+        if (direction) {
             direction?.routes[0].legs[0].steps.forEach((step, index) => {
                 let distance = 0
                 step.geometry.coordinates.forEach((coordinate) => {
@@ -59,7 +59,7 @@ const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive
     }, [direction, direction?.routes, location.lat, location.lng])
 
     useEffect(() => {
-        if (currentStep !== undefined && Object.entries(direction).length !== 0) {
+        if (currentStep !== undefined && direction) {
             setNavigation(direction?.routes[0].legs[0].steps[currentStep])
         }
     }, [currentStep, direction, direction?.routes])

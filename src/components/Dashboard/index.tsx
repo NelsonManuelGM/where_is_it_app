@@ -1,25 +1,40 @@
-import {FC, useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {LatLngLiteral} from "leaflet";
 
-import {Direction} from "../../services/mapbox/interfaces";
 import Notification from "./Notification";
 import ZoomButton from "./ZoomButton";
 import NavigationComponent from "./Navigation";
-import {NotificationType} from "./Notification/interfaces";
 import ProductRequest from "./ProductRequest";
 import CustomInput from "./CustomInput";
+import NotificationAlert from "./NotificationAlert";
+import {useAppDispatch, useAppSelector} from "../../context/hooks";
+import {ErrorCode} from "../../context/slices/notification";
+import {requestDirection} from "../../context/slices/direction";
 
-export interface DashboardProps {
-    center: LatLngLiteral,
-    onClickLocomotion: (value: string) => void,
-    direction?: Direction,
-    error?: string,
-    onSetTarget: (value: LatLngLiteral) => void, //for test only
-}
 
-const Dashboard: FC<DashboardProps> = ({center, direction, error, onClickLocomotion, onSetTarget}) => {
+const Dashboard = () => {
 
     const [responsiveFlag, setResponsiveFlag] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
+    const {configuration} = useAppSelector(state => state.direction)
+    const {type} = useAppSelector(state => state.error)
+
+
+    //TODO FOR TEST ONLY
+    const onSetTarget = useCallback((value: LatLngLiteral) => {
+        let param: Array<LatLngLiteral> = []
+        if (value.lat && value.lng) {
+            param.push(value)
+            dispatch({type: 'direction/setConfiguration', payload: {target: param}})
+        }
+    }, [dispatch])
+
+    // TODO this logic will change, this dispatch is only for test, it most depend on the pending status
+    useEffect(() => {
+        if (configuration.target && configuration.departure.lat && configuration.departure.lng) {
+            dispatch(requestDirection())
+        }
+    }, [configuration.departure.lat, configuration.departure.lng, configuration.target, configuration.profile, dispatch])
 
     useEffect(() => {
         const updateDimensions = () => {
@@ -36,13 +51,12 @@ const Dashboard: FC<DashboardProps> = ({center, direction, error, onClickLocomot
     }, [])
 
     return <>
-        <NavigationComponent direction={direction} location={center} responsive={responsiveFlag}
-                             onClickLocomotion={onClickLocomotion}/>
+        <NavigationComponent location={configuration.departure} responsive={responsiveFlag}/>
 
         <ZoomButton/>
 
         {
-            error && <Notification text={error} type={NotificationType.error}/>
+            type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert/> : <Notification/>
         }
 
         {

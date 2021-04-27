@@ -7,7 +7,7 @@ import {CustomInputParams} from "./interface";
 
 const Cover = styled.div`
   right: 25px;
-  top: 140px;
+  top: 200px;
   width: 260px;
 
   display: flex;
