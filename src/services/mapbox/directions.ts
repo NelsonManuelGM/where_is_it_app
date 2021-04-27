@@ -19,8 +19,8 @@ const alignCoordinates = (departure: LatLngLiteral, target: Array<LatLngLiteral>
 }
 
 
-const validateCoordinates = (coordinates: LatLngLiteral | Array<LatLngLiteral>):boolean => {
-    let flag:boolean = false
+const validateCoordinates = (coordinates: LatLngLiteral | Array<LatLngLiteral>): boolean => {
+    let flag: boolean = false
 
     if (isLatLngLiteral(coordinates)) {
         flag = coordinates.lng !== 0 && coordinates.lat !== 0
@@ -35,19 +35,21 @@ const validateCoordinates = (coordinates: LatLngLiteral | Array<LatLngLiteral>):
     return flag
 }
 
-const useDirection = ({target,departure,alternatives,steps,profile}: DirectionsProps) => {
+const useDirection = ({target, departure, alternatives, steps, profile}: DirectionsProps) => {
     const [direction, setDirection] = useState<Direction>()
     const [url, setUrl] = useState<string>()
+    const [directionError, setDirectionError] = useState()
 
     //TODO coordinates[0] is my current position
     let [coordinates, setCoordinates] = useState<string>()
 
-    useEffect(()=>{
-        if (validateCoordinates(departure) && validateCoordinates(target)){
+    useEffect(() => {
+        if (departure && target && validateCoordinates(departure) && validateCoordinates(target)) {
             let auxiliary = alignCoordinates(departure, target)
             setCoordinates(auxiliary)
         }
-    },[departure, target])
+
+    }, [departure, target])
 
     useEffect(() => {
         if (coordinates) {
@@ -66,14 +68,15 @@ const useDirection = ({target,departure,alternatives,steps,profile}: DirectionsP
                     })
                 }
             } catch (err) {
-                console.log(err)
+                setDirectionError(err.message)
             }
         }
         if (url) {
             getDirections()
         }
     }, [url])
-    return direction
+
+    return {direction, directionError}
 }
 
 export default useDirection
