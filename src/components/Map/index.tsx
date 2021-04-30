@@ -49,7 +49,7 @@ const MapComponent: FC<MapProps> = ({places}) => {
     }, [configuration.departure, zoom])
 
     return <div className={customStyle.mapStyle} style={{margin: '-8px'}}>
-        <MapContainer zoom={zoom} className={customStyle.mapStyle} zoomAnimation={true} scrollWheelZoom={true}
+        <MapContainer zoom={zoom} center={configuration.departure} className={customStyle.mapStyle} zoomAnimation={true} scrollWheelZoom={true}
                       zoomControl={false}
                       whenCreated={whenCreatedHandler}>
             <TileLayer
