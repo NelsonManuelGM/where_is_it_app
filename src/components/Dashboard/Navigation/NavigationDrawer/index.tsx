@@ -1,14 +1,25 @@
-import {FC, memo} from "react";
-import {Avatar, Drawer, List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
+import React, {FC, memo, useCallback} from "react";
+import {Drawer, List, ListItem, ListItemIcon, Typography, useTheme} from "@material-ui/core";
+import styled from "styled-components";
+import {Close} from "@material-ui/icons";
 
-import {customStyles} from "../../../../context/theme";
+
+import {customStyles} from "../../../../styles/theme";
 import {NavigationDrawerParams} from "./interfaces";
 import {Step} from "../../../../services/mapbox/interfaces";
 import SignalGenerator from "./SignalGenerator";
 
+const CustomDrawer = styled(Drawer)`
+  .MuiPaper-root {
+    background-color: ${({theme}) => theme.palette.grayscale.darkGray};
+    opacity: 90%;
+    width: 310px;
+  }
+`;
 
-const NavigationDrawer: FC<NavigationDrawerParams> = ({open, onDrawerClose, route}) => {
-    const {navigationIcon} = customStyles()
+const NavigationDrawer: FC<NavigationDrawerParams> = ({open, onDrawerClose, route, currentStep}) => {
+    const {drawerSelectedItem} = customStyles()
+    const theme = useTheme()
 
     const handleStepString = (step: Step): string => {
         let value: Array<string> = []
@@ -21,28 +32,63 @@ const NavigationDrawer: FC<NavigationDrawerParams> = ({open, onDrawerClose, rout
         return value.join('\n')
     }
 
-    return <Drawer anchor={"right"} open={open} onClose={onDrawerClose}>
-        <List>
+    const listRef = useCallback((value: HTMLUListElement) => {
+        if (value && currentStep !== undefined) {
+            for (let c of value.children) {
+                if (c.tagName === 'DIV') {
+                    c.classList.forEach(value => {
+                        if (value === currentStep.toString()) {
+                            c.attributes[0].ownerElement?.classList.add(drawerSelectedItem)
+                        }
+                    })
+                }
+            }
+        }
+    }, [currentStep, drawerSelectedItem])
+
+
+    return <CustomDrawer anchor={"right"} open={open} onClose={onDrawerClose} theme={theme}>
+        <Close fontSize="inherit" onClick={onDrawerClose}
+               style={{
+                   color: theme.palette.grayscale.main,
+                   marginRight: '90%',
+                   padding: '10px 0 0 8px',
+                   cursor: 'pointer'
+               }}/>
+        <List ref={listRef}>
             {
                 route && route.legs[0].steps.map((step, index) => {
-                    return <ListItem key={index} alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar style={{backgroundColor: 'transparent'}}>
-                                    {
-                                        SignalGenerator({
-                                            type: step.maneuver.type,
-                                            modifier: step.maneuver.modifier,
-                                            iconCssClass: navigationIcon
-                                        })
-                                    }
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={step.maneuver.instruction} secondary={handleStepString(step)}/>
+                    return <div style={{paddingTop: '4px', paddingBottom: '6px'}} className={`${index}`} key={index}>
+
+                        <ListItem alignItems="flex-start" >
+
+                            <ListItemIcon style={{color: 'white'}}>
+                                {
+                                    SignalGenerator({
+                                        type: step.maneuver.type,
+                                        modifier: step.maneuver.modifier,
+                                    })
+                                }
+                            </ListItemIcon>
+
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <Typography variant={'body1'}
+                                            style={{color: theme.palette.grayscale.light}}>{step.maneuver.instruction}</Typography>
+
+                                <Typography variant='body2' style={{color: theme.palette.secondary.main}}>{
+                                    handleStepString(step)
+                                }</Typography>
+
+                                <Typography variant='subtitle2' style={{color: theme.palette.grayscale.main}}>
+                                    {step.distance.toFixed()} meters | {(step.duration / 60).toFixed()} min
+                                </Typography>
+                            </div>
                         </ListItem>
+                    </div>
                 })
             }
         </List>
-    </Drawer>
+    </CustomDrawer>
 }
 
 export default memo(NavigationDrawer)

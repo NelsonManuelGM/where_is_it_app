@@ -1,44 +1,42 @@
-import {FC, memo} from "react";
+import React, {FC, memo} from "react";
 import {ArrowBackIos} from "@material-ui/icons";
-import {CircularProgress, Typography, useTheme} from "@material-ui/core";
 import styled from "styled-components";
+import {CircularProgress, Typography, useTheme} from "@material-ui/core";
 
-import {customStyles} from "../../../../context/theme";
+import {customStyles} from "../../../../styles/theme";
 import {NavigatorProps} from "./interfaces";
 import SignalGenerator from "../NavigationDrawer/SignalGenerator";
+import {Step} from "../../../../services/mapbox/interfaces";
 
 const Cover = styled.div`
-  right: 25px;
-  margin: 1rem 1rem;
-  width: 260px;
-  max-height: 60px;
   min-height: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-bottom: 5px;
 `
 
-const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
+const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive}) => {
     const theme = useTheme()
-    const {navigationIcon, dashboardStyle} = customStyles()
-    // const [navigate, setNavigate] = useState(navigation || {type:'departure',modifier:'straight', instruction:undefined})
+    const {dashboardStyle} = customStyles()
 
 
     // TODO separate this function and the one in the drawer to an external file
-    const handleStepString = (name?: string, destination?: string): string => {
+    const handleStepString = (step: Step): string => {
         let value: Array<string> = []
-        if (name) {
-            value.push(name)
+        if (step.name) {
+            value.push(step.name)
         }
-        if (destination) {
-            value.push(destination)
+        if (step.destinations) {
+            value.push(step.destinations)
         }
         return value.join('\n')
     }
 
-    return <Cover theme={theme} className={dashboardStyle} onClick={onClickBox}>
+    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}
+                  style={{width: responsive ? '80px' : '260px'}}>
         {
             navigation ? <div style={{
                     display: "flex",
@@ -48,18 +46,23 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
                     width: '100%'
                 }}>
                     <ArrowBackIos fontSize={'small'} style={{margin: '0 0.5rem'}}/>
-                    <div>
-                        <Typography variant={'body2'}>{navigation.instruction}</Typography>
+                    {
+                        !responsive && <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <Typography variant={'body1'}>{navigation.maneuver.instruction}</Typography>
 
-                        <Typography variant={'caption'} style={{color: theme.palette.grayscale.main}}>{
-                            handleStepString(navigation.name, navigation.destination)
-                        }</Typography>
-                    </div>
+                            <Typography variant='body2' style={{color: theme.palette.secondary.main}}>{
+                                handleStepString(navigation)
+                            }</Typography>
+
+                            <Typography variant='subtitle2' style={{color: theme.palette.grayscale.main}}>
+                                {navigation.distance.toFixed()} meters | {(navigation.duration / 60).toFixed()} min
+                            </Typography>
+                        </div>
+                    }
                     {
                         SignalGenerator({
-                            type: navigation.type,
-                            modifier: navigation.modifier,
-                            iconCssClass: navigationIcon
+                            type: navigation.maneuver.type,
+                            modifier: navigation.maneuver.modifier,
                         })
                     }
                 </div>

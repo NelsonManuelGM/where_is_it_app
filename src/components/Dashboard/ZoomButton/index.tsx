@@ -1,28 +1,47 @@
-import {FC, memo} from "react";
+import {memo} from "react";
 import {Add, Remove} from "@material-ui/icons";
-import {customStyles} from "../../../context/theme";
 import styled from "styled-components";
-import {ZoomButtonProps} from "./interfaces";
+
+import {customStyles} from "../../../styles/theme";
+import {useAppSelector} from "../../../context/hooks";
+import {useDispatch} from "react-redux";
 
 const Cover = styled.div`
+  position: absolute;
   right: 25px;
-  bottom: 50px;
-  margin: 1rem 1rem;
-  width: 40px;
+  bottom: 100px;
+  z-index: 500;
+
+  width: 20px;
   height: 70px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+
   cursor: pointer;
 `
 
-const ZoomButton: FC<ZoomButtonProps> = ({currentZoom, onChangeZoom}) => {
+const ZoomButton = () => {
     const {dashboardStyle} = customStyles()
+    const {zoom} = useAppSelector(state => state.map)
+    const dispatch = useDispatch()
+
+    const onChangeZoom = (flag: boolean) => {
+        let _zoom = zoom
+        if (flag && zoom < 18) {
+            ++_zoom
+        }
+        if (!flag && _zoom > 12) {
+            --_zoom
+        }
+        dispatch({type: "map/changeZoom", payload: {zoom: _zoom}})
+    }
 
     return <Cover className={dashboardStyle}>
-        <Add onClick={() => currentZoom < 18 && onChangeZoom(++currentZoom)}/>
-        <Remove onClick={() => currentZoom > 12 && onChangeZoom(--currentZoom)}/>
+        <Add onClick={() => onChangeZoom(true)}/>
+        <Remove onClick={() => onChangeZoom(false)}/>
     </Cover>
 }
 

@@ -1,16 +1,10 @@
 import {ReactChildren} from "react";
-
-export interface NavigationManeuver {
-    type: string,
-    modifier?: string,
-    instruction?: string
-    name?: string
-    destination?: string
-}
+import { Step } from "../../../../services/mapbox/interfaces";
 
 export interface NavigatorProps {
-    navigation?: NavigationManeuver,
+    navigation?: Step,
     children?: ReactChildren,
-    onClickBox: () => void
+    onClickBox: () => void,
+    responsive:boolean
 }
 

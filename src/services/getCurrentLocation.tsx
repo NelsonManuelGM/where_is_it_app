@@ -1,27 +1,49 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {LatLngLiteral} from "leaflet";
+import React, {useCallback, useEffect, useRef} from 'react';
+import {useDispatch} from "react-redux";
+
+import {useAppSelector} from "../context/hooks";
+import {ErrorCode} from "../context/slices/notification";
+
 
 const useGetCurrentLocation = (options: object = {}) => {
-
-    const [center, setCenter] = useState<LatLngLiteral>({lat: 0, lng: 0});
-    const [error, setError] = useState<string | undefined>();
+    const dispatch = useDispatch()
+    const departure = useAppSelector(state => state.direction.configuration.departure)
     const locationWatchId: React.MutableRefObject<undefined | number> = useRef();
 
-    const handleSuccess = (position: any) => {
+    const handleSuccess = useCallback((position: any) => {
         console.log("Latitude: " + position.coords.latitude.toPrecision(21) +
             " Longitude: " + position.coords.longitude.toPrecision(21) +
             " Accuracy: " + position.coords.accuracy
         )
+        if (departure.lat !== position.coords.latitude || departure.lng !== position.coords.longitude) {
+            dispatch({
+                type: 'direction/setConfiguration', payload: {
+                    departure: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    }
+                }
+            })
+            dispatch({type: 'notification/changeNotification', payload: {notification: ''}})
+        }
+    },[departure.lat, departure.lng, dispatch])
 
-        setCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-        })
-    }
-
-    const handleError = (error: any) => {
-        setError(error.message)
-    }
+    const handleError = useCallback((error: any) => {
+        if (error) {
+            switch (error.code) {
+                case (error.TIMEOUT):
+                    dispatch({type: 'notification/changeNotification', payload: {notification: error.message, type: ErrorCode.TIMEOUT}})
+                    locationWatchId.current = navigator.geolocation.watchPosition(handleSuccess, handleError, options)
+                    break;
+                case (error.PERMISSION_DENIED):
+                    dispatch({
+                        type: 'notification/changeNotification',
+                        payload: {notification: error.message, type: ErrorCode.PERMISSION_DENIED}
+                    })
+                    break;
+            }
+        }
+    },[dispatch, handleSuccess, options])
 
     const cancelLocationWatch = () => {
         if (locationWatchId.current && navigator.geolocation) {
@@ -33,12 +55,16 @@ const useGetCurrentLocation = (options: object = {}) => {
         if (navigator.geolocation) {
             locationWatchId.current = navigator.geolocation.watchPosition(handleSuccess, handleError, options)
         } else {
-            alert("It can't handle geo location")
+            dispatch({
+                type: 'notification/changeNotification',
+                payload: {notification: "It can't handle geo location", type: ErrorCode.GEO_LOCATION_UNSUPPORTED}
+            })
+
         }
         return cancelLocationWatch
-    }, [options])
+    }, [dispatch, handleError, handleSuccess, options])
 
-    return {center, cancelLocationWatch, error}
+    return cancelLocationWatch
 }
 
 export default useGetCurrentLocation

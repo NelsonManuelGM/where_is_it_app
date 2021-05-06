@@ -8,6 +8,7 @@ declare module "@material-ui/core/styles/createPalette" {
             light: CSSProperties['color'];
             main: CSSProperties['color'];
             dark: CSSProperties['color'];
+            darkGray: CSSProperties['color'];
         }
     }
 
@@ -16,6 +17,7 @@ declare module "@material-ui/core/styles/createPalette" {
             light: CSSProperties['color'];
             main: CSSProperties['color'];
             dark: CSSProperties['color'];
+            darkGray: CSSProperties['color'];
         }
     }
 }
@@ -25,7 +27,8 @@ function createMyTheme(options: ThemeOptions) {
         palette: {
             grayscale: {
                 dark: '#000000',
-                main: '#4c4c4c',
+                darkGray: '#232323',
+                main: '#777777',
                 light: '#ffffff',
             }
         },
@@ -51,19 +54,15 @@ const customStyles = makeStyles({
         width: '2.3rem',
         height: '2.3rem',
     },
-    navigationIcon: {
-        margin:'0 0.5rem'
-    },
     dashboardStyle: {
-        boxShadow: `0 1px 3px 2px ${theme.palette.grayscale.main}`,
         color: theme.palette.grayscale.light,
         background: theme.palette.grayscale.dark,
         opacity: '85%',
-        borderRadius: '6px',
         padding: '0.5rem',
-        zIndex: 500,
-        position: 'absolute'
     },
+    drawerSelectedItem: {
+        background: theme.palette.warning.main,
+    }
 });
 
 

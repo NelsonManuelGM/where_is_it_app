@@ -9,8 +9,8 @@ export enum Profile {
 
 export interface DirectionsProps {
     profile: string,
-    departure: LatLngLiteral,
-    target: Array<LatLngLiteral>,
+    departure?: LatLngLiteral,
+    target?: Array<LatLngLiteral>,
     steps: boolean,
     alternatives: boolean,
 }
