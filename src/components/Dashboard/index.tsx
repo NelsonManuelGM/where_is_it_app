@@ -4,7 +4,7 @@ import {LatLngLiteral} from "leaflet";
 import Notification from "./Notification";
 import ZoomButton from "./ZoomButton";
 import NavigationComponent from "./Navigation";
-import ProductRequest from "./ProductRequest";
+import ProductRequest from "./ProductComponent";
 import CustomInput from "./CustomInput";
 import NotificationAlert from "./NotificationAlert";
 import {useAppDispatch, useAppSelector} from "../../context/hooks";
@@ -59,12 +59,10 @@ const Dashboard = () => {
             type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert/> : <Notification/>
         }
 
-        {
-            responsiveFlag && <ProductRequest/>
-        }
+        <ProductRequest responsiveFlag={responsiveFlag}/>
 
         {/*TODO FOR TEST ONLY*/}
-        <CustomInput onSetTarget={onSetTarget}/>
+        {/*<CustomInput onSetTarget={onSetTarget}/>*/}
     </>
 }
 
