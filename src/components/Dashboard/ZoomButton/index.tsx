@@ -12,7 +12,7 @@ const Cover = styled.div`
   bottom: 100px;
   z-index: 500;
 
-  width: 40px;
+  width: 20px;
   height: 70px;
 
   display: flex;

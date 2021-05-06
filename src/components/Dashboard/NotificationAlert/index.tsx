@@ -6,7 +6,8 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
+    DialogTitle, 
+    Typography,
     useTheme
 } from '@material-ui/core';
 
@@ -36,6 +37,7 @@ const NotificationAlert = () => {
             return;
         }
         setOpen(false);
+        window.location.reload()
     };
 
     useEffect(() => {
@@ -47,17 +49,17 @@ const NotificationAlert = () => {
     return <CustomDialog open={open} onClose={handleClose} theme={theme}
                          aria-labelledby="alert-dialog-title"
                          aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{notification}</DialogTitle>
         <DialogContent>
             <DialogContentText id="alert-dialog-description">
-                {notification}
+                <Typography variant={"h6"}>Oppps! we can't find your location!</Typography>
                 <br/>
-                Activate your GPS in order to find you current location
+                <Typography variant={"subtitle2"}>Activate your GPS in order to find you current location</Typography>
             </DialogContentText>
         </DialogContent>
         <DialogActions>
             <Button onClick={handleClose} style={{color: theme.palette.error.main}} autoFocus>
-                OK
+                OK!
             </Button>
         </DialogActions>
     </CustomDialog>

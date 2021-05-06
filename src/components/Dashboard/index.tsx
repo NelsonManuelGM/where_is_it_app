@@ -1,23 +1,23 @@
-import {useCallback, useEffect, useState} from "react";
-import {LatLngLiteral} from "leaflet";
+import { useCallback, useEffect, useState } from "react";
+import { LatLngLiteral } from "leaflet";
 
 import Notification from "./Notification";
 import ZoomButton from "./ZoomButton";
 import NavigationComponent from "./Navigation";
-import ProductRequest from "./ProductRequest";
+import ProductRequest from "./ProductComponent";
 import CustomInput from "./CustomInput";
 import NotificationAlert from "./NotificationAlert";
-import {useAppDispatch, useAppSelector} from "../../context/hooks";
-import {ErrorCode} from "../../context/slices/notification";
-import {requestDirection} from "../../context/slices/direction";
+import { useAppDispatch, useAppSelector } from "../../context/hooks";
+import { ErrorCode } from "../../context/slices/notification";
+import { requestDirection } from "../../context/slices/direction";
 
 
 const Dashboard = () => {
 
     const [responsiveFlag, setResponsiveFlag] = useState<boolean>(false)
     const dispatch = useAppDispatch()
-    const {configuration} = useAppSelector(state => state.direction)
-    const {type} = useAppSelector(state => state.error)
+    const { configuration } = useAppSelector(state => state.direction)
+    const { type } = useAppSelector(state => state.error)
 
 
     //TODO FOR TEST ONLY
@@ -25,7 +25,7 @@ const Dashboard = () => {
         let param: Array<LatLngLiteral> = []
         if (value.lat && value.lng) {
             param.push(value)
-            dispatch({type: 'direction/setConfiguration', payload: {target: param}})
+            dispatch({ type: 'direction/setConfiguration', payload: { target: param } })
         }
     }, [dispatch])
 
@@ -51,20 +51,18 @@ const Dashboard = () => {
     }, [])
 
     return <>
-        <NavigationComponent location={configuration.departure} responsive={responsiveFlag}/>
+        <NavigationComponent location={configuration.departure} responsive={responsiveFlag} />
 
-        <ZoomButton/>
-
-        {
-            type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert/> : <Notification/>
-        }
+        <ZoomButton />
 
         {
-            responsiveFlag && <ProductRequest/>
+            type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert /> : <Notification />
         }
 
-        {/*TODO FOR TEST ONLY*/}
-        <CustomInput onSetTarget={onSetTarget}/>
+        <ProductRequest responsiveFlag={responsiveFlag} />
+
+        // TODO FOR TEST ONLY
+        <CustomInput onSetTarget={onSetTarget} />
     </>
 }
 

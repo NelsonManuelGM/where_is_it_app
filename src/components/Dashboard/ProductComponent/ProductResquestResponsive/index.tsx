@@ -2,7 +2,7 @@ import React, {memo, useCallback, useState} from "react";
 import {Menu} from "@material-ui/icons";
 import styled from "styled-components";
 
-import {customStyles} from "../../../styles/theme";
+import {customStyles} from "../../../../styles/theme";
 import ProductRequestDrawer from "./ProductRequestDrawer";
 
 
@@ -22,7 +22,7 @@ const SearchProduct = styled.div`
   cursor: pointer;
 `;
 
-const ProductRequest = () => {
+const ProductRequestResponsive = () => {
     const {dashboardStyle} = customStyles();
     const [open, setOpen] = useState<boolean>(false);
 
@@ -36,4 +36,4 @@ const ProductRequest = () => {
     </SearchProduct>
 }
 
-export default memo(ProductRequest)
+export default memo(ProductRequestResponsive)

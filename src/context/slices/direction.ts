@@ -2,7 +2,7 @@ import {Direction, Profile} from "../../services/mapbox/interfaces";
 import {LatLngLiteral} from "leaflet";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {manageRoutes, manageWaypoints} from "../../services/mapbox/auxiliary/dataCleaner";
-import {getDirection} from "../../services/mapbox/mapboxAPI";
+import {getDirection} from "../../services/mapbox";
 import {RootState} from "../store";
 import {ErrorCode} from "./notification";
 
