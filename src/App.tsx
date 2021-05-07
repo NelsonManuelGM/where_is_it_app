@@ -1,18 +1,12 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 
-import {useGetCurrentLocation, useGetToken} from './services';
+import {useGetCurrentLocation} from './services';
 import Dashboard from "./components/Dashboard";
 import MapComponent from "./components/Map";
 import {getPlaces} from "./context/slices/places";
 import {useAppSelector} from './context/hooks'
 
 function App() {
-
-    const [token, setToken] = useState<string>('')
-    useEffect(() => {
-        setToken(useGetToken)
-    }, [])
-
     // ---- MAP variables
     const {places} = useAppSelector(getPlaces)     //TODO temporary state
 
