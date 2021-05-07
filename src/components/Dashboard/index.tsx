@@ -20,7 +20,7 @@ const Dashboard = () => {
     const { type } = useAppSelector(state => state.error)
 
 
-    //TODO FOR TEST ONLY
+    // TODO FOR TEST ONLY
     const onSetTarget = useCallback((value: LatLngLiteral) => {
         let param: Array<LatLngLiteral> = []
         if (value.lat && value.lng) {

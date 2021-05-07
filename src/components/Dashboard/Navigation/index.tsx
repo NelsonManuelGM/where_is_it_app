@@ -47,7 +47,7 @@ const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive
                 step.geometry.coordinates.forEach((coordinate) => {
                     distance = distanceBetweenPoint(location.lat, location.lng, coordinate[0], coordinate[1])
                     //TODO delete this
-                    console.log('DISTANCE -> METERS -> : ', parseInt(distance.toFixed(2)))
+                    console.log('DISTANCE IN METERS -> : ', parseInt(distance.toFixed(2)))
 
                     //TODO customizable error for current position
                     if (parseInt(distance.toFixed(2)) < 90)
