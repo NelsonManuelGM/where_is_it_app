@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+    branches: [dev, master]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{matrix.node-version}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{matrix.node-version}}
+    
+    - name: yarn install
+      run: |
+        yarn install 
+    
+    - name: yarn test
+      run: |
+        yarn test
+      env:
+        CI: true
+
+    - name: yarn build
+      run: |
+        yarn build
+
+    - name: Add remote origin
+      run: |
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        
+    - name: Deploy to Heroku
+      run: |
+        git push heroku HEAD:master -f
