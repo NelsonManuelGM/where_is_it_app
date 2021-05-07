@@ -61,7 +61,7 @@ const Dashboard = () => {
 
         <ProductRequest responsiveFlag={responsiveFlag} />
 
-        // TODO FOR TEST ONLY
+        { /* TODO FOR TEST ONLY */ }
         <CustomInput onSetTarget={onSetTarget} />
     </>
 }
