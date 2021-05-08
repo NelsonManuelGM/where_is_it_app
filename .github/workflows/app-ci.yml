@@ -34,13 +34,13 @@ jobs:
       run: |
         yarn build
     # TODO repair this line
-    - name: Add remote origin
-      env:
-          KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP: ${{ secrets.HEROKU_APP }}
-      run: |
-        git remote add heroku https://heroku:$KEY@git.heroku.com/$APP.git
+    # - name: Add remote origin
+    #   env:
+    #       KEY: ${{ secrets.HEROKU_API_KEY }}
+    #       APP: ${{ secrets.HEROKU_APP }}
+    #   run: |
+    #     git remote add heroku https://heroku:$KEY@git.heroku.com/$APP.git
 
-    - name: Deploy to Heroku
-      run: |
-        git push heroku HEAD:master -f
+    # - name: Deploy to Heroku
+    #   run: |
+    #     git push heroku HEAD:master -f
