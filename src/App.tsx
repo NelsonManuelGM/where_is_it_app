@@ -1,14 +1,18 @@
-import {useEffect} from 'react';
+import React, {Suspense, useEffect} from 'react';
+import {LinearProgress } from '@material-ui/core';
 
 import {useGetCurrentLocation} from './services';
 import Dashboard from "./components/Dashboard";
-import MapComponent from "./components/Map";
 import {getPlaces} from "./context/slices/places";
-import {useAppSelector} from './context/hooks'
+import {useAppSelector} from './context/hooks';
 
 function App() {
+    
+    const MapComponent = React.lazy(()=>import('./components/Map'))
+
     // ---- MAP variables
-    const {places} = useAppSelector(getPlaces)     //TODO temporary state
+    //TODO temporary state
+    const {places} = useAppSelector(getPlaces)     
 
     const {configuration} = useAppSelector(state => state.direction)
 
@@ -30,8 +34,12 @@ function App() {
 
     return (
         <div className="App">
-            <Dashboard />
-            <MapComponent places={places}/>
+
+            <Suspense fallback={<LinearProgress />}  >
+                <Dashboard />
+            
+                <MapComponent places={places}/>
+            </Suspense>
         </div>
     );
 }
