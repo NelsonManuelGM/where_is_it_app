@@ -10,16 +10,13 @@ const CustomDrawer = styled(Drawer)`
     background-color: ${({theme}) => theme.palette.grayscale.darkGray};
     opacity: 90%;
     max-width: 500px;
+    width: 100%;
 
-    @media only screen and (max-width: 600px){
-      width: 500px;
-    }
-
-    @media only screen and (max-width: 450px){
+    @media screen and (max-width: 450px){
       width: 400px;
     }
 
-    @media only screen and (max-width: 375px){
+    @media screen and (max-width: 375px){
       width: 310px;
     }
   }

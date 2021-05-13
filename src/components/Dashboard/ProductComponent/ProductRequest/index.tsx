@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   padding: 8px;
   cursor: pointer;
 
-  @media only screen and (max-width: 1024px){
+  @media screen and (max-width: 1024px){
       width: 450px;
   }
 

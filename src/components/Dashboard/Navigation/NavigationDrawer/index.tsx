@@ -15,7 +15,7 @@ const CustomDrawer = styled(Drawer)`
     opacity: 90%;
     max-width:400px;
 
-    @media only screen and (max-width: 375px) {
+    @media screen and (max-width: 375px) {
         width: 310px;
     }
   }
