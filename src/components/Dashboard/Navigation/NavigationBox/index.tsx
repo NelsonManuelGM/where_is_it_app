@@ -16,6 +16,13 @@ const Cover = styled.div`
   justify-content: center;
   cursor: pointer;
   margin-bottom: 5px;
+
+  max-width:260;
+  width: 100%;
+
+  @media screen and (max-width:600px){
+      width:70px;
+  }
 `
 
 const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive}) => {
@@ -35,8 +42,7 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive})
         return value.join('\n')
     }
 
-    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}
-                  style={{width: responsive ? '80px' : '260px'}}>
+    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}>
         {
             navigation ? <div style={{
                     display: "flex",
