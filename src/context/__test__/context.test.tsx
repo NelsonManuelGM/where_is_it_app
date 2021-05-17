@@ -25,6 +25,7 @@ test("Initial State: Direction", ()=>{
 
 test("Initial State: Maps", ()=>{
     expect(store.getState().map.zoom).toStrictEqual(15)
+    expect(store.getState().map.responsive).toStrictEqual(false)
 })
 
 
