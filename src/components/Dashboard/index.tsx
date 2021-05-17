@@ -10,11 +10,11 @@ import NotificationAlert from "./NotificationAlert";
 import { useAppDispatch, useAppSelector } from "../../context/hooks";
 import { ErrorCode } from "../../context/slices/notification";
 import { requestDirection } from "../../context/slices/direction";
+import { setResponsive } from "../../context/slices/map";
 
 
 const Dashboard = () => {
 
-    const [responsiveFlag, setResponsiveFlag] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const { configuration } = useAppSelector(state => state.direction)
     const { type } = useAppSelector(state => state.error)
@@ -36,22 +36,33 @@ const Dashboard = () => {
         }
     }, [configuration.departure.lat, configuration.departure.lng, configuration.target, configuration.profile, dispatch])
 
-    useEffect(() => {
-        const updateDimensions = () => {
-            const width = window.innerWidth
-            if (width <= 600) {
-                setResponsiveFlag(true)
-            } else {
-                setResponsiveFlag(false)
-            }
+    
+    const updateDimensions = () => {
+        const width = window.innerWidth
+        if (width <= 600) {
+            dispatch(setResponsive({responsive:true}))
+        } else {
+            dispatch(setResponsive({responsive:false}))
         }
+    }
+
+    useEffect(() => {
+        window.addEventListener('load', updateDimensions);
+        return () =>
+            window.removeEventListener('load', updateDimensions);
+
+    }, [])
+
+    useEffect(() => {       
         window.addEventListener('resize', updateDimensions);
         return () =>
             window.removeEventListener('resize', updateDimensions);
+
     }, [])
 
+
     return <>
-        <NavigationComponent location={configuration.departure} responsive={responsiveFlag} />
+        <NavigationComponent location={configuration.departure} />
 
         <ZoomButton />
 
@@ -59,7 +70,7 @@ const Dashboard = () => {
             type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert /> : <Notification />
         }
 
-        <ProductRequest responsiveFlag={responsiveFlag} />
+        <ProductRequest/>
 
         { /* TODO FOR TEST ONLY */ }
         <CustomInput onSetTarget={onSetTarget} />
