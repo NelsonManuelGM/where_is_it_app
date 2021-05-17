@@ -7,6 +7,7 @@ import {customStyles} from "../../../../styles/theme";
 import {NavigatorProps} from "./interfaces";
 import SignalGenerator from "../NavigationDrawer/SignalGenerator";
 import {Step} from "../../../../services/mapbox/interfaces";
+import { useAppSelector } from "../../../../context/hooks";
 
 const Cover = styled.div`
   min-height: 40px;
@@ -25,10 +26,10 @@ const Cover = styled.div`
   }
 `
 
-const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive}) => {
+const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
     const theme = useTheme()
     const {dashboardStyle} = customStyles()
-
+    const state = useAppSelector(state => state.map)
 
     // TODO separate this function and the one in the drawer to an external file
     const handleStepString = (step: Step): string => {
@@ -53,7 +54,7 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive})
                 }}>
                     <ArrowBackIos fontSize={'small'} style={{margin: '0 0.5rem'}}/>
                     {
-                        !responsive && <div style={{display: 'flex', flexDirection: 'column'}}>
+                        !state.responsive && <div style={{display: 'flex', flexDirection: 'column'}}>
                             <Typography variant={'body1'}>{navigation.maneuver.instruction}</Typography>
 
                             <Typography variant='body2' style={{color: theme.palette.secondary.main}}>{

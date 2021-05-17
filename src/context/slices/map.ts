@@ -15,16 +15,16 @@ export const mapSlice = createSlice({
     name: 'map',
     initialState: initialState,
     reducers: {
-        changeZoom: (state, action: PayloadAction<MapType>) => {
+        changeZoom: (state, action) => {
             state.zoom = action.payload.zoom
         },
-        setResponsive: (state, action: PayloadAction<MapType>) => {
+        setResponsive: (state, action) => {
             state.responsive = action.payload.responsive
         },
     }
 })
 
 
-export const { changeZoom } = mapSlice.actions
+export const { changeZoom, setResponsive } = mapSlice.actions
 
 export default mapSlice.reducer
