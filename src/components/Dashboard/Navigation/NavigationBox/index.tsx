@@ -18,8 +18,7 @@ const Cover = styled.div`
   cursor: pointer;
   margin-bottom: 5px;
 
-  max-width:260;
-  width: 100%;
+  width:250px;
 
   @media screen and (max-width:600px){
       width:70px;
@@ -43,7 +42,7 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
         return value.join('\n')
     }
 
-    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}>
+    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle} data-testid='navigation-box'>
         {
             navigation ? <div style={{
                     display: "flex",
