@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { LatLngLiteral } from "leaflet";
 
 import Notification from "./Notification";
@@ -62,7 +62,7 @@ const Dashboard = () => {
 
 
     return <>
-        <NavigationComponent location={configuration.departure} />
+        <NavigationComponent location={configuration.departure}/>
 
         <ZoomButton />
 
@@ -77,4 +77,4 @@ const Dashboard = () => {
     </>
 }
 
-export default Dashboard
+export default memo(Dashboard)

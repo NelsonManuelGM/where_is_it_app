@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   align-items: flex-end;
 `;
 
-const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive}) => {
+const NavigationComponent: FC<NavigationComponentProps> = ({location}) => {
     const {direction} = useAppSelector(state => state.direction)
 
     const [currentStep, setCurrentStep] = useState<number>()
@@ -66,7 +66,7 @@ const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive
 
     return <>
         <Wrapper>
-            <NavigationBox navigation={navigation} onClickBox={onClickBox} responsive={responsive}/>
+            <NavigationBox navigation={navigation} onClickBox={onClickBox}/>
             {
                 navigation && <LocomotionPicker/>
             }
