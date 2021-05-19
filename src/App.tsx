@@ -32,16 +32,15 @@ function App() {
 
     }, [cancelLocationWatch, configuration.departure.lat, configuration.departure.lng]);
 
-    return (
+    return <>
         <div className="App">
-
             <Suspense fallback={<LinearProgress />}  >
                 <Dashboard />
-            
                 <MapComponent places={places}/>
+                <div id='app-notification'></div>
             </Suspense>
-        </div>
-    );
+        </div>        
+    </>
 }
 
 export default App;
