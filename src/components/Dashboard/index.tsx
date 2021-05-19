@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect } from "react";
 import { LatLngLiteral } from "leaflet";
 
-import Notification from "./Notification";
+import AlertComponent from "./Alert";
 import ZoomButton from "./ZoomButton";
 import NavigationComponent from "./Navigation";
 import ProductRequest from "./ProductComponent";
@@ -66,11 +66,11 @@ const Dashboard = () => {
 
         <ZoomButton />
 
-        {
-            type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert /> : <Notification />
-        }
-
         <ProductRequest/>
+
+        {
+            type === ErrorCode.PERMISSION_DENIED ? <NotificationAlert /> : <AlertComponent />
+        }
 
         { /* TODO FOR TEST ONLY */ }
         <CustomInput onSetTarget={onSetTarget} />
