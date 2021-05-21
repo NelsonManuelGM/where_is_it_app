@@ -38,6 +38,7 @@ test('contain Navigation box', () => {
 
 test('contain Zoom', () => {
 	expect(screen.getByTestId('increase-zoom')).toBeInTheDocument()
+	expect(screen.getByTestId('decrease-zoom')).toBeInTheDocument()
 })
 
 
