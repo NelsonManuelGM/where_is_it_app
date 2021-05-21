@@ -42,9 +42,9 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
         return value.join('\n')
     }
 
-    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle} data-testid='navigation-box'>
+    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}>
         {
-            navigation ? <div style={{
+            navigation && <div style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -72,7 +72,6 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
                         })
                     }
                 </div>
-                : <CircularProgress disableShrink style={{color: "white"}} size={25}/>
         }
     </Cover>
 }

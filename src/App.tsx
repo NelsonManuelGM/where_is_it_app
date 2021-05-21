@@ -37,7 +37,7 @@ function App() {
             <Suspense fallback={<LinearProgress />}  >
                 <Dashboard />
                 <MapComponent places={places}/>
-                <div id='app-notification'></div>
+                <div id='app-notification' data-testid='app-notification'></div>
             </Suspense>
         </div>        
     </>

@@ -1,4 +1,4 @@
-import {memo, useCallback, useState} from "react";
+import {FC, memo, useCallback, useState} from "react";
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@material-ui/core";
 import {DirectionsBikeOutlined, DirectionsWalkOutlined, DriveEtaOutlined} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
@@ -47,7 +47,7 @@ const LocomotionPicker = () => {
 
     const [value, setValue] = useState(0)
 
-    return <Wrapper style={{padding: 0}} className={dashboardStyle} theme={theme}>
+    return <Wrapper style={{padding: 0}} className={dashboardStyle} theme={theme} data-testid='locomotion-picker'>
         <BottomNavigation value={value} onChange={(event, newValue) => {
             setValue(newValue);
         }}>

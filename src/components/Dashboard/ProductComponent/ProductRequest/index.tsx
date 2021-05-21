@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 const ProductRequest = () => {
     const {dashboardStyle} = customStyles()
 
-    return <Wrapper className={dashboardStyle}>
+    return <Wrapper className={dashboardStyle} data-testid='product-box'>
         testing panel
     </Wrapper>
 }

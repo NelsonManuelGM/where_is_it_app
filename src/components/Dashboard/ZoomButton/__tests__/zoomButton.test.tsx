@@ -1,10 +1,9 @@
 import React from "react";
 import {fireEvent, render} from "@testing-library/react";
 import { Provider } from "react-redux";
-import "@testing-library/jest-dom/extend-expect";
 
 import {store} from '../../../../context/store';
-import ZoomButton  from './../index';
+import ZoomButton  from '../index';
 
 let increase_zoom_button:HTMLElement;
 let decrease_zoom_button:HTMLElement;
