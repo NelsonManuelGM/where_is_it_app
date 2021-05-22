@@ -5,13 +5,13 @@ import {useGetCurrentLocation} from './services';
 import Dashboard from "./components/Dashboard";
 import {getPlaces} from "./context/slices/places";
 import {useAppSelector} from './context/hooks';
+import Extras from './components/Extras';
 
 function App() {
     
     const MapComponent = React.lazy(()=>import('./components/Map'))
 
-    // ---- MAP variables
-    //TODO temporary state
+    //TODO temporary data, t will come from the API
     const {places} = useAppSelector(getPlaces)     
 
     const {configuration} = useAppSelector(state => state.direction)
@@ -37,6 +37,7 @@ function App() {
             <Suspense fallback={<LinearProgress />}  >
                 <Dashboard />
                 <MapComponent places={places}/>
+                <Extras />
                 <div id='app-notification' data-testid='app-notification'></div>
             </Suspense>
         </div>        
