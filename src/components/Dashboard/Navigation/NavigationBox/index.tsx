@@ -30,7 +30,6 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
     const {dashboardStyle} = customStyles()
     const state = useAppSelector(state => state.map)
 
-    // TODO separate this function and the one in the drawer to an external file
     const handleStepString = (step: Step): string => {
         let value: Array<string> = []
         if (step.name) {
