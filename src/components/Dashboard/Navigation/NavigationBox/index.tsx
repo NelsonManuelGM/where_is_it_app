@@ -1,7 +1,7 @@
-import React, {FC, memo} from "react";
+import {FC, memo} from "react";
 import {ArrowBackIos} from "@material-ui/icons";
 import styled from "styled-components";
-import {CircularProgress, Typography, useTheme} from "@material-ui/core";
+import {Typography, useTheme} from "@material-ui/core";
 
 import {customStyles} from "../../../../styles/theme";
 import {NavigatorProps} from "./interfaces";

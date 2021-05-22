@@ -37,28 +37,28 @@ const Dashboard = () => {
     }, [configuration.departure.lat, configuration.departure.lng, configuration.target, configuration.profile, dispatch])
 
     
-    const updateDimensions = () => {
+    const updateDimensions = useCallback(() => {
         const width = window.innerWidth
         if (width <= 600) {
             dispatch(setResponsive({responsive:true}))
         } else {
             dispatch(setResponsive({responsive:false}))
         }
-    }
+    },[dispatch])
 
     useEffect(() => {
         window.addEventListener('load', updateDimensions);
         return () =>
             window.removeEventListener('load', updateDimensions);
 
-    }, [])
+    }, [updateDimensions])
 
     useEffect(() => {       
         window.addEventListener('resize', updateDimensions);
         return () =>
             window.removeEventListener('resize', updateDimensions);
 
-    }, [])
+    }, [updateDimensions])
 
 
     return <>
