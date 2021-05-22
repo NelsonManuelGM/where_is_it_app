@@ -32,7 +32,7 @@ const initialState: DirectionType = {
     configuration: {
         profile: Profile.driving,
         departure: {lat:0,lng:0},
-        target: [{lat: 25.69125971191103, lng: -80.3877791296447}],
+        target: [{lat: 25.69125971191103, lng: -80.3877791296447}], //TODO this target will change depending on the API
         steps: true, //mandatory
         alternatives: false //unnecessary alternative}
     },
