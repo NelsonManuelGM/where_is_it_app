@@ -52,11 +52,11 @@ const LocomotionPicker = () => {
             setValue(newValue);
         }}>
             <BottomNavigationAction onClick={() => onClickLocomotion(Profile.driving)}
-                                    icon={<DriveEtaOutlined fontSize={"small"}/>} about={"Driving"}/>
+                                    icon={<DriveEtaOutlined fontSize={"small"}/>} about={"Driving"} data-testid='btn-driving'/>
             <BottomNavigationAction onClick={() => onClickLocomotion(Profile.cycling)}
-                                    icon={<DirectionsBikeOutlined fontSize={"small"}/>} about={"Cycling"}/>
+                                    icon={<DirectionsBikeOutlined fontSize={"small"}/>} about={"Cycling"} data-testid='btn-cycling'/>
             <BottomNavigationAction onClick={() => onClickLocomotion(Profile.walking)}
-                                    icon={<DirectionsWalkOutlined fontSize={"small"}/>} about={"Walking"}/>
+                                    icon={<DirectionsWalkOutlined fontSize={"small"}/>} about={"Walking"} data-testid='btn-walking'/>
         </BottomNavigation>
     </Wrapper>
 }
