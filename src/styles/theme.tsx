@@ -1,6 +1,6 @@
-import {makeStyles, responsiveFontSizes, ThemeOptions, unstable_createMuiStrictModeTheme as createMuiTheme} from "@material-ui/core";
+import { makeStyles, responsiveFontSizes, ThemeOptions, unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
 
-import {CSSProperties} from "react";
+import { CSSProperties } from "react";
 
 declare module "@material-ui/core/styles/createPalette" {
     interface Palette {

@@ -1,27 +1,27 @@
-import React, {Suspense, useEffect} from 'react';
-import {LinearProgress } from '@material-ui/core';
+import React, { Suspense, useEffect } from "react";
+import { LinearProgress } from "@material-ui/core";
 
-import {useGetCurrentLocation} from './services';
+import { useGetCurrentLocation } from "./services";
 import Dashboard from "./components/Dashboard";
-import {getPlaces} from "./context/slices/places";
-import {useAppSelector} from './context/hooks';
-import Extras from './components/Extras';
+import { getPlaces } from "./context/slices/places";
+import { useAppSelector } from "./context/hooks";
+import Extras from "./components/Extras";
 
 function App() {
-    
-    const MapComponent = React.lazy(()=>import('./components/Map'))
 
-    //TODO temporary data, t will come from the API
-    const {places} = useAppSelector(getPlaces)     
-
-    const {configuration} = useAppSelector(state => state.direction)
+    const MapComponent = React.lazy(() => import('./components/Map'))
 
     const options = {
         enableHighAccuracy: true,
-        timeout: 1000, //* 60, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
-        maximumAge: 1000 * 3600 * 24 // 24 hour       : 27000
+        timeout: 6000, //* milliseconds / 6 seconds
+        maximumAge: 60000, //* milliseconds / 60 seconds - 1 minutes
     };
     const cancelLocationWatch = useGetCurrentLocation(options)
+
+    //TODO temporary data, t will come from the API
+    const { places } = useAppSelector(getPlaces)
+
+    const { configuration } = useAppSelector(state => state.direction)
 
     useEffect(() => {
         if (!configuration.departure.lat && !configuration.departure.lng) return;
@@ -34,13 +34,13 @@ function App() {
 
     return <>
         <div className="App">
+            <Dashboard />
             <Suspense fallback={<LinearProgress />}  >
-                <Dashboard />
-                <MapComponent places={places}/>
-                <Extras />
-                <div id='app-notification' data-testid='app-notification'></div>
+                <MapComponent places={places} />
             </Suspense>
-        </div>        
+            <Extras />
+            <div id='app-notification' data-testid='app-notification'></div>
+        </div>
     </>
 }
 

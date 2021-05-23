@@ -44,7 +44,6 @@ export const requestDirection = createAsyncThunk(
     'direction/requestDirection',
     // async ({alternatives, steps, departure, profile, target}: DirectionConfigurationType, thunkAPI) => {
     async (_, thunkAPI) => {
-
         try {
             const {direction} = thunkAPI.getState() as RootState
 
