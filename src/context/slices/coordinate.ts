@@ -5,12 +5,16 @@ interface CoordinateType {
     latitude: number;
     longitude: number;
     accuracy: number;
+    gpsAccuracyThreshold?: number,
+    positionAccuracyThreshold?: number,
 }
 
 const initialState: CoordinateType = {
     latitude: 0,
     longitude: 0,
     accuracy: 0,
+    gpsAccuracyThreshold: 18000,//*30,
+    positionAccuracyThreshold: 20,
 }
 
 
@@ -33,7 +37,11 @@ export const setCoordinate = createAsyncThunk(
 export const coordinateSlice = createSlice({
     name:'coordinate',
     initialState: initialState,
-    reducers:{},
+    reducers:{
+        updateConfiguration: (state, action) => {
+            state = {...action.payload}
+        }
+    },
     extraReducers:(builder)=>{
         builder.addCase(setCoordinate.fulfilled, (state, {payload})=>{
             state.latitude = payload.latitude;
@@ -44,6 +52,6 @@ export const coordinateSlice = createSlice({
     }
 });
 
-export const { } = coordinateSlice.actions;
+export const { updateConfiguration } = coordinateSlice.actions;
 
 export default coordinateSlice.reducer;
