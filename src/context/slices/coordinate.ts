@@ -13,7 +13,7 @@ const initialState: CoordinateType = {
     latitude: 0,
     longitude: 0,
     accuracy: 0,
-    gpsAccuracyThreshold: 18000,//*30,
+    gpsAccuracyThreshold: 30,
     positionAccuracyThreshold: 20,
 }
 

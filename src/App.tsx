@@ -11,24 +11,25 @@ function App() {
 
     const MapComponent = React.lazy(() => import('./components/Map'))
 
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 6000, //* milliseconds / 6 seconds
-        maximumAge: 60000, //* milliseconds / 60 seconds - 1 minutes
-    };
-    const cancelLocationWatch = useGetCurrentLocation(options)
+    const GPSConfiguration = {
+        options: {
+            enableHighAccuracy: true,
+            timeout: 5000,//6000, //* milliseconds / 6 seconds
+            maximumAge: 6000//60000, //* milliseconds / 60 seconds - 1 minutes
+        },
+    }
 
+    const cancelLocationWatch = useGetCurrentLocation(GPSConfiguration.options)
     //TODO temporary data, t will come from the API
     const { places } = useAppSelector(getPlaces)
-
     const { configuration } = useAppSelector(state => state.direction)
 
     useEffect(() => {
         if (!configuration.departure.lat && !configuration.departure.lng) return;
 
         setTimeout(() => {
-            cancelLocationWatch();
-        }, 6000);
+            cancelLocationWatch()!;
+        }, 1000);
 
     }, [cancelLocationWatch, configuration.departure.lat, configuration.departure.lng]);
 

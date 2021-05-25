@@ -6,9 +6,10 @@ import { setCoordinate } from '../context/slices/coordinate';
 import { ErrorCode } from "../context/slices/notification";
 
 
-const useGetCurrentLocation = (options: object = {}) => {
+const useGetCurrentLocation = (options: object) => {
     const dispatch = useDispatch()
-    const departure = useAppSelector(state => state.direction.configuration.departure)
+    const { gpsAccuracyThreshold } = useAppSelector(state => state.coordinates)
+    const coordinates = useAppSelector(state => state.coordinates)
     const locationWatchId: React.MutableRefObject<undefined | number> = useRef();
 
     const handleSuccess = useCallback((position: any) => {
@@ -16,21 +17,35 @@ const useGetCurrentLocation = (options: object = {}) => {
             " Longitude: " + position.coords.longitude.toPrecision(21) +
             " Accuracy: " + position.coords.accuracy
         )
-        if (departure.lat !== position.coords.latitude || departure.lng !== position.coords.longitude) {
-            dispatch(setCoordinate({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                accuracy: position.coords.accuracy
-            }))
-            dispatch({ type: 'notification/changeNotification', payload: { notification: '' } })
+
+        if (gpsAccuracyThreshold === undefined || position.coords.accuracy <= gpsAccuracyThreshold) {
+            if (coordinates.latitude !== position.coords.latitude || coordinates.longitude !== position.coords.longitude) {
+                dispatch(setCoordinate({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    accuracy: position.coords.accuracy,
+                }))
+                dispatch({ type: 'notification/changeNotification', payload: { notification: '' } })
+            }
         }
-    }, [departure.lat, departure.lng, dispatch])
+        else {
+            setTimeout(() => {
+                if (gpsAccuracyThreshold !== undefined || position.coords.accuracy > gpsAccuracyThreshold)
+                    dispatch({ type: 'notification/changeNotification', payload: { notification: 'Failed to reach desired accuracy' } })
+            }, 1000)
+        }
+
+
+    }, [gpsAccuracyThreshold, coordinates.latitude, coordinates.longitude, dispatch])
 
     const handleError = useCallback((error: any) => {
         if (error) {
             switch (error.code) {
                 case (error.TIMEOUT):
-                    dispatch({ type: 'notification/changeNotification', payload: { notification: error.message, type: ErrorCode.TIMEOUT } })
+                    dispatch({
+                        type: 'notification/changeNotification',
+                        payload: { notification: error.message, type: ErrorCode.TIMEOUT }
+                    })
                     locationWatchId.current = navigator.geolocation.watchPosition(handleSuccess, handleError, options)
                     break;
                 case (error.PERMISSION_DENIED):
