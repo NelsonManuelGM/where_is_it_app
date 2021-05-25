@@ -41,6 +41,7 @@ const NavigationComponent: FC<NavigationComponentProps> = ({ location }) => {
     const {dashboardStyle} = customStyles()
 
     const { direction } = useAppSelector(state => state.direction)
+    const { positionAccuracyThreshold } = useAppSelector(state => state.coordinates)
 
     const [currentStep, setCurrentStep] = useState<number>()
 
@@ -70,13 +71,13 @@ const NavigationComponent: FC<NavigationComponentProps> = ({ location }) => {
                     console.log('DISTANCE IN METERS -> : ', parseInt(distance.toFixed(2)))
 
                     //TODO customizable error for current position
-                    if (parseInt(distance.toFixed(2)) < 90)
+                    if (parseInt(distance.toFixed(2)) <= positionAccuracyThreshold!)
                         setCurrentStep(index)
                 })
 
             })
         }
-    }, [direction, direction?.routes, location.lat, location.lng])
+    }, [direction, direction?.routes, location.lat, location.lng, positionAccuracyThreshold])
 
     useEffect(() => {
         if (currentStep !== undefined && direction) {
