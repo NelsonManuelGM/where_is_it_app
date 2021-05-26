@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 
 interface CoordinateType {
@@ -59,6 +59,6 @@ export const coordinateSlice = createSlice({
     }
 });
 
-export const { updateConfiguration } = coordinateSlice.actions;
+export const { updateConfiguration, positionAccuracy, updateGpsAccuracy } = coordinateSlice.actions;
 
 export default coordinateSlice.reducer;
