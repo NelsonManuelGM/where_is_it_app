@@ -59,6 +59,7 @@ const customStyles = makeStyles({
         background: theme.palette.grayscale.dark,
         opacity: '85%',
         padding: '0.5rem',
+        borderRadius: '5px',
     },
     drawerSelectedItem: {
         background: theme.palette.warning.main,
