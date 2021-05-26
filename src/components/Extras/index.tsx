@@ -1,11 +1,11 @@
 import { Typography } from "@material-ui/core";
 import { LatLngLiteral } from "leaflet";
-import React, { memo, useCallback, useMemo } from "react";
+import { memo, useCallback } from "react";
 import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../../context/hooks";
 import { customStyles } from "../../styles/theme";
-import CustomInput from "./CustomInput"
+import CustomInput from "./CustomInput";
 
 const CurrentPosition = styled.div`
     bottom: 5%;
@@ -28,12 +28,12 @@ const Extras = () => {
     }, [dispatch])
 
     return <>
-        <CurrentPosition className={dashboardStyle}>
-            <Typography variant={'subtitle2'} >
-                lat: {latitude} / lng: {longitude} / accuracy: {accuracy}
-            </Typography>
-        </CurrentPosition>
-
+            <CurrentPosition className={dashboardStyle}>
+                <Typography variant={'subtitle2'} >
+                    lat: {latitude} / lng: {longitude} / accuracy: {accuracy}
+                </Typography>
+            </CurrentPosition>
+    
         <CustomInput onSetTarget={onSetTarget} />
     </>
 }
