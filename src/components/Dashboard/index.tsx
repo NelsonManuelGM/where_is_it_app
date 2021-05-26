@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect } from "react";
 
 import AlertComponent from "./Alert";
-import ZoomButton from "./ZoomButton";
 import NavigationComponent from "./Navigation";
 import ProductRequest from "./ProductComponent";
 import NotificationAlert from "./NotificationAlert";
+import Configuration from "./Configuration";
 import { useAppDispatch, useAppSelector } from "../../context/hooks";
 import { ErrorCode } from "../../context/slices/notification";
 import { requestDirection } from "../../context/slices/direction";
@@ -51,7 +51,7 @@ const Dashboard = () => {
     return <>
         <NavigationComponent location={configuration.departure} />
 
-        <ZoomButton />
+        <Configuration/>
 
         <ProductRequest />
 
