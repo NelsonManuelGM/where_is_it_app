@@ -1,12 +1,11 @@
-import { Fade, FormControl, FormControlLabel, FormGroup, Paper, Popper, PopperPlacementType, Switch, Typography, useTheme } from "@material-ui/core";
-import { LatLngLiteral } from "leaflet";
-import React, { memo, useCallback, useMemo, useState, MouseEvent, useRef } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
-import { PlayArrow, Settings } from '@material-ui/icons/';
+
+import { Fade, FormControl, FormControlLabel, FormGroup, Paper, Popper, Switch, useTheme } from "@material-ui/core";
+import { Settings } from '@material-ui/icons/';
+
 import { customStyles } from "../../../../styles/theme";
 import { useAppDispatch } from "../../../../context/hooks";
-
-
 
 const Wrapper = styled.div`
     margin-bottom:5px;
