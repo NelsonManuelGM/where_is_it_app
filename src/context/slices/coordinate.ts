@@ -40,7 +40,14 @@ export const coordinateSlice = createSlice({
     reducers:{
         updateConfiguration: (state, action) => {
             state = {...action.payload}
-        }
+        },
+        updateGpsAccuracy:(state,action) =>{
+            state.gpsAccuracyThreshold = action.payload.flag ? 30 : 18000
+        },
+        positionAccuracy:(state,action) =>{
+            state.positionAccuracyThreshold = action.payload.flag ? 20 : 90
+
+        },
     },
     extraReducers:(builder)=>{
         builder.addCase(setCoordinate.fulfilled, (state, {payload})=>{
