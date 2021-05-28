@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.js": "/where_is_it_app/static/js/main.7ff21cde.chunk.js",
-    "main.js.map": "/where_is_it_app/static/js/main.7ff21cde.chunk.js.map",
-    "runtime-main.js": "/where_is_it_app/static/js/runtime-main.a4a04101.js",
-    "runtime-main.js.map": "/where_is_it_app/static/js/runtime-main.a4a04101.js.map",
+    "main.js": "/where_is_it_app/static/js/main.2fba4b38.chunk.js",
+    "main.js.map": "/where_is_it_app/static/js/main.2fba4b38.chunk.js.map",
+    "runtime-main.js": "/where_is_it_app/static/js/runtime-main.2ef52bae.js",
+    "runtime-main.js.map": "/where_is_it_app/static/js/runtime-main.2ef52bae.js.map",
     "static/css/2.608ee897.chunk.css": "/where_is_it_app/static/css/2.608ee897.chunk.css",
-    "static/js/2.cb84ce4a.chunk.js": "/where_is_it_app/static/js/2.cb84ce4a.chunk.js",
-    "static/js/2.cb84ce4a.chunk.js.map": "/where_is_it_app/static/js/2.cb84ce4a.chunk.js.map",
+    "static/js/2.d9b5a9b5.chunk.js": "/where_is_it_app/static/js/2.d9b5a9b5.chunk.js",
+    "static/js/2.d9b5a9b5.chunk.js.map": "/where_is_it_app/static/js/2.d9b5a9b5.chunk.js.map",
     "static/js/3.b0e93bb2.chunk.js": "/where_is_it_app/static/js/3.b0e93bb2.chunk.js",
     "static/js/3.b0e93bb2.chunk.js.map": "/where_is_it_app/static/js/3.b0e93bb2.chunk.js.map",
-    "static/js/4.fd577386.chunk.js": "/where_is_it_app/static/js/4.fd577386.chunk.js",
-    "static/js/4.fd577386.chunk.js.map": "/where_is_it_app/static/js/4.fd577386.chunk.js.map",
+    "static/js/4.75a901ee.chunk.js": "/where_is_it_app/static/js/4.75a901ee.chunk.js",
+    "static/js/4.75a901ee.chunk.js.map": "/where_is_it_app/static/js/4.75a901ee.chunk.js.map",
     "static/js/5.4fa10fa2.chunk.js": "/where_is_it_app/static/js/5.4fa10fa2.chunk.js",
     "static/js/5.4fa10fa2.chunk.js.map": "/where_is_it_app/static/js/5.4fa10fa2.chunk.js.map",
     "index.html": "/where_is_it_app/index.html",
     "service-worker.js": "/where_is_it_app/service-worker.js",
     "service-worker.js.map": "/where_is_it_app/service-worker.js.map",
     "static/css/2.608ee897.chunk.css.map": "/where_is_it_app/static/css/2.608ee897.chunk.css.map",
-    "static/js/2.cb84ce4a.chunk.js.LICENSE.txt": "/where_is_it_app/static/js/2.cb84ce4a.chunk.js.LICENSE.txt",
+    "static/js/2.d9b5a9b5.chunk.js.LICENSE.txt": "/where_is_it_app/static/js/2.d9b5a9b5.chunk.js.LICENSE.txt",
     "static/js/3.b0e93bb2.chunk.js.LICENSE.txt": "/where_is_it_app/static/js/3.b0e93bb2.chunk.js.LICENSE.txt",
     "static/media/index.css": "/where_is_it_app/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.a4a04101.js",
+    "static/js/runtime-main.2ef52bae.js",
     "static/css/2.608ee897.chunk.css",
-    "static/js/2.cb84ce4a.chunk.js",
-    "static/js/main.7ff21cde.chunk.js"
+    "static/js/2.d9b5a9b5.chunk.js",
+    "static/js/main.2fba4b38.chunk.js"
   ]
 }
