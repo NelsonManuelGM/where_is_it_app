@@ -5,6 +5,5 @@ export interface NavigatorProps {
     navigation?: Step,
     children?: ReactChildren,
     onClickBox: () => void,
-    responsive:boolean
 }
 

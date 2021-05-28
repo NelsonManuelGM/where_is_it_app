@@ -2,16 +2,10 @@ import {memo} from "react";
 import {Add, Remove} from "@material-ui/icons";
 import styled from "styled-components";
 
-import {customStyles} from "../../../styles/theme";
-import {useAppSelector} from "../../../context/hooks";
-import {useDispatch} from "react-redux";
+import {customStyles} from "../../../../styles/theme";
+import {useAppDispatch, useAppSelector} from "../../../../context/hooks";
 
 const Cover = styled.div`
-  position: absolute;
-  right: 25px;
-  bottom: 100px;
-  z-index: 500;
-
   width: 20px;
   height: 70px;
 
@@ -26,12 +20,13 @@ const Cover = styled.div`
 const ZoomButton = () => {
     const {dashboardStyle} = customStyles()
     const {zoom} = useAppSelector(state => state.map)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onChangeZoom = (flag: boolean) => {
         let _zoom = zoom
         if (flag && zoom < 18) {
             ++_zoom
+            
         }
         if (!flag && _zoom > 12) {
             --_zoom
@@ -40,8 +35,8 @@ const ZoomButton = () => {
     }
 
     return <Cover className={dashboardStyle}>
-        <Add onClick={() => onChangeZoom(true)}/>
-        <Remove onClick={() => onChangeZoom(false)}/>
+        <Add data-testid="increase-zoom" onClick={() => onChangeZoom(true)}/>
+        <Remove data-testid="decrease-zoom" onClick={() => onChangeZoom(false)}/>
     </Cover>
 }
 

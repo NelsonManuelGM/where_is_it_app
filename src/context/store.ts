@@ -1,15 +1,18 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {combineReducers} from "redux";
+
 import {placesSlice} from './slices/places'
 import {mapSlice} from './slices/map'
 import {directionSlice} from "./slices/direction";
 import {notificationSlice} from "./slices/notification";
+import {coordinateSlice} from "./slices/coordinate";
 
 const reducer = combineReducers({
     places: placesSlice.reducer,
     map: mapSlice.reducer,
     direction: directionSlice.reducer,
     error: notificationSlice.reducer,
+    coordinates: coordinateSlice.reducer,
 })
 
 export const store = configureStore({

@@ -1,13 +1,15 @@
-import {FC, memo, useCallback, useEffect, useState} from "react";
+import React, { FC, memo, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import NavigationBox from "./NavigationBox";
 import NavigationDrawer from "./NavigationDrawer";
-import {NavigationComponentProps} from "./interfaces";
-import {distanceBetweenPoint} from "../../../services";
+import { NavigationComponentProps } from "./interfaces";
+import { distanceBetweenPoint } from "../../../services";
 import LocomotionPicker from "./LocomotioPicker";
-import {Route, Step} from "../../../services/mapbox/interfaces";
-import {useAppSelector} from "../../../context/hooks";
+import { Route, Step } from "../../../services/mapbox/interfaces";
+import { useAppSelector } from "../../../context/hooks";
+import { CircularProgress } from "@material-ui/core";
+import { customStyles } from "../../../styles/theme";
 
 const Wrapper = styled.div`
   top: 20px;
@@ -19,8 +21,27 @@ const Wrapper = styled.div`
   align-items: flex-end;
 `;
 
-const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive}) => {
-    const {direction} = useAppSelector(state => state.direction)
+const ErrorCover = styled.div`
+  min-height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 5px;
+
+  width:250px;
+
+  @media screen and (max-width:600px){
+      width:70px;
+  }
+`
+
+const NavigationComponent: FC<NavigationComponentProps> = ({ location }) => {
+    const {dashboardStyle} = customStyles()
+
+    const { direction } = useAppSelector(state => state.direction)
+    const { positionAccuracyThreshold } = useAppSelector(state => state.coordinates)
 
     const [currentStep, setCurrentStep] = useState<number>()
 
@@ -50,13 +71,13 @@ const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive
                     console.log('DISTANCE IN METERS -> : ', parseInt(distance.toFixed(2)))
 
                     //TODO customizable error for current position
-                    if (parseInt(distance.toFixed(2)) < 90)
+                    if (parseInt(distance.toFixed(2)) <= positionAccuracyThreshold!)
                         setCurrentStep(index)
                 })
 
             })
         }
-    }, [direction, direction?.routes, location.lat, location.lng])
+    }, [direction, direction?.routes, location.lat, location.lng, positionAccuracyThreshold])
 
     useEffect(() => {
         if (currentStep !== undefined && direction) {
@@ -65,15 +86,21 @@ const NavigationComponent: FC<NavigationComponentProps> = ({location, responsive
     }, [currentStep, direction, direction?.routes])
 
     return <>
-        <Wrapper>
-            <NavigationBox navigation={navigation} onClickBox={onClickBox} responsive={responsive}/>
+        <Wrapper data-testid='navigation-box'>
             {
-                navigation && <LocomotionPicker/>
+                navigation ? <>
+                    <NavigationBox navigation={navigation} onClickBox={onClickBox} />
+                    <LocomotionPicker />
+                </>
+                    : <ErrorCover className={dashboardStyle}>
+                        <CircularProgress disableShrink style={{ color: "white" }} size={25} />
+                    </ErrorCover>
+
             }
         </Wrapper>
         {
             routes && <NavigationDrawer open={drawerFlag && currentStep !== undefined} onDrawerClose={onClickBox}
-                           route={routes} currentStep={currentStep}/>
+                route={routes} currentStep={currentStep} />
         }
     </>
 }

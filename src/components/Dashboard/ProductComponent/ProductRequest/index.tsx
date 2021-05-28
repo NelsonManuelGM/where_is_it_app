@@ -5,7 +5,7 @@ import {customStyles} from "../../../../styles/theme";
 
 
 const Wrapper = styled.div`
-  width: 300px;
+  width: 500px;
   height: 100vh;
   top:0;
   left: 0;
@@ -19,13 +19,18 @@ const Wrapper = styled.div`
 
   padding: 8px;
   cursor: pointer;
+
+  @media screen and (max-width: 1024px){
+      width: 450px;
+  }
+
 `;
 
 
 const ProductRequest = () => {
     const {dashboardStyle} = customStyles()
 
-    return <Wrapper className={dashboardStyle}>
+    return <Wrapper className={dashboardStyle} data-testid='product-box'>
         testing panel
     </Wrapper>
 }

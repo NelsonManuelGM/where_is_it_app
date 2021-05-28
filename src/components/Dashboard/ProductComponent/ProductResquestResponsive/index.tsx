@@ -30,7 +30,7 @@ const ProductRequestResponsive = () => {
         setOpen(!open)
     }, [open])
 
-    return <SearchProduct className={dashboardStyle} onClick={() => setOpen(!open)}>
+    return <SearchProduct className={dashboardStyle} onClick={() => setOpen(!open)} data-testid='product-box-responsive'>
         <Menu fontSize="large"/>
         <ProductRequestDrawer open={open} onCloseDrawer={onCloseDrawer}/>
     </SearchProduct>

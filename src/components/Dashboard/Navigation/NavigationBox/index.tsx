@@ -1,12 +1,13 @@
-import React, {FC, memo} from "react";
+import {FC, memo} from "react";
 import {ArrowBackIos} from "@material-ui/icons";
 import styled from "styled-components";
-import {CircularProgress, Typography, useTheme} from "@material-ui/core";
+import {Typography, useTheme} from "@material-ui/core";
 
 import {customStyles} from "../../../../styles/theme";
 import {NavigatorProps} from "./interfaces";
 import SignalGenerator from "../NavigationDrawer/SignalGenerator";
 import {Step} from "../../../../services/mapbox/interfaces";
+import { useAppSelector } from "../../../../context/hooks";
 
 const Cover = styled.div`
   min-height: 40px;
@@ -16,14 +17,19 @@ const Cover = styled.div`
   justify-content: center;
   cursor: pointer;
   margin-bottom: 5px;
+
+  width:250px;
+
+  @media screen and (max-width:600px){
+      width:70px;
+  }
 `
 
-const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive}) => {
+const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox}) => {
     const theme = useTheme()
     const {dashboardStyle} = customStyles()
+    const state = useAppSelector(state => state.map)
 
-
-    // TODO separate this function and the one in the drawer to an external file
     const handleStepString = (step: Step): string => {
         let value: Array<string> = []
         if (step.name) {
@@ -35,10 +41,9 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive})
         return value.join('\n')
     }
 
-    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}
-                  style={{width: responsive ? '80px' : '260px'}}>
+    return <Cover theme={theme} onClick={onClickBox} className={dashboardStyle}>
         {
-            navigation ? <div style={{
+            navigation && <div style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -47,7 +52,7 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive})
                 }}>
                     <ArrowBackIos fontSize={'small'} style={{margin: '0 0.5rem'}}/>
                     {
-                        !responsive && <div style={{display: 'flex', flexDirection: 'column'}}>
+                        !state.responsive && <div style={{display: 'flex', flexDirection: 'column'}}>
                             <Typography variant={'body1'}>{navigation.maneuver.instruction}</Typography>
 
                             <Typography variant='body2' style={{color: theme.palette.secondary.main}}>{
@@ -66,7 +71,6 @@ const NavigationBox: FC<NavigatorProps> = ({navigation, onClickBox, responsive})
                         })
                     }
                 </div>
-                : <CircularProgress disableShrink style={{color: "white"}} size={25}/>
         }
     </Cover>
 }

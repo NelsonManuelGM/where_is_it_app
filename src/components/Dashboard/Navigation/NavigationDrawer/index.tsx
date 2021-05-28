@@ -13,7 +13,11 @@ const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {
     background-color: ${({theme}) => theme.palette.grayscale.darkGray};
     opacity: 90%;
-    width: 310px;
+    max-width:400px;
+
+    @media screen and (max-width: 375px) {
+        width: 310px;
+    }
   }
 `;
 

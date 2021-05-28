@@ -1,6 +1,6 @@
-import {makeStyles, responsiveFontSizes, ThemeOptions, unstable_createMuiStrictModeTheme as createMuiTheme} from "@material-ui/core";
+import { makeStyles, responsiveFontSizes, ThemeOptions, unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
 
-import {CSSProperties} from "react";
+import { CSSProperties } from "react";
 
 declare module "@material-ui/core/styles/createPalette" {
     interface Palette {
@@ -59,6 +59,7 @@ const customStyles = makeStyles({
         background: theme.palette.grayscale.dark,
         opacity: '85%',
         padding: '0.5rem',
+        borderRadius: '5px',
     },
     drawerSelectedItem: {
         background: theme.palette.warning.main,
