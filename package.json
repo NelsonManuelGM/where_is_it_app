@@ -54,7 +54,7 @@
     "build:development": "env-cmd -f .env.development npm run build",
 
     "predeploy": "npm run build:development",
-    "deploy": "gh-pages -b master -d build",
+    "deploy": "gh-pages -b deploy -d build",
 
     "start": "react-scripts start",
     "build": "react-scripts build",
