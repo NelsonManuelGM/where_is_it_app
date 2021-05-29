@@ -1,6 +1,6 @@
 {
   "name": "where_is_it_app",
-  "homepage": "https://where-is-it-app.herokuapp.com/",
+  "homepage": "https://nelsonmanuelgm.github.io/where_is_it_app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,6 +20,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
+    "env-cmd": "^10.1.0",
     "fontsource-roboto": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.7.1",
@@ -50,8 +51,11 @@
     "gh-pages": "^3.1.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b deploy -d build",
+    "build:development": "env-cmd -f .env.development npm run build",
+
+    "predeploy": "npm run build:development",
+    "deploy": "gh-pages -b master -d build",
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

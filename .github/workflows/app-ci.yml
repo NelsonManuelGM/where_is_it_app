@@ -34,9 +34,9 @@ jobs:
       run: |
         yarn test
     
-    - name: yarn build
-      run: |
-        yarn build
+    # - name: yarn build
+    #   run: |
+    #     yarn build
     # TODO repair this line
     # - name: Add remote origin
     #   env:
